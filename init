@@ -1,0 +1,44 @@
+#!/bin/execlineb -P
+# 
+# S6 init for MLFS
+# Version: 1.00
+# Based on Obarun bootscripts
+
+# Setup PATH
+/bin/s6-envdir -if /etc/s6-linux-init/env
+/bin/importas -i PATH PATH
+/bin/export PATH ${PATH}
+
+/bin/cd /
+
+# Clean up environment
+emptyenv -p
+s6-setsid -qb --
+umask 022
+
+foreground {
+	if { s6-echo -- "............................................." }
+	if { s6-echo -- ". [M]usl [L]inux [F]rom [Scratch] with S6"  ." }
+	s6-echo -- "............................................."
+}
+
+# Copy service for pid1 at the right place
+s6-envdir -if /etc/s6-linux-init/env
+importas -i SRC SRC
+importas -i DEST DEST
+foreground { 
+	s6-hiercopy ${SRC} ${DEST}
+}
+
+redirfd -r 0 /dev/null
+redirfd -wnb 1 ${DEST}/service/s6-svscan-log/fifo
+fdmove -c 2 1
+
+# Run stage 2
+background {
+	s6-setsid --
+	redirfd -w 1 ${DEST}/service/s6-svscan-log/fifo
+	/etc/s6-linux-init/stage2
+}
+
+unexport !

@@ -1,0 +1,3 @@
+#!/bin/execlineb -P
+
+/sbin/agetty --delay 02 -J 38400 tty6

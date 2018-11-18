@@ -1,0 +1,6 @@
+#!/bin/execlineb -P
+fdmove -c 2 1
+importas -i SCRIPTS SCRIPTS
+if { s6-echo -- rofs-modules started }
+foreground { ${SCRIPTS}/modules.sh }
+s6-echo -- rofs-modules successfully started
