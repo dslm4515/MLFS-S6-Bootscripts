@@ -1,30 +1,3 @@
 #!/bin/execlineb -P
 
-s6-envdir -if /etc/s6-linux-init/env
-importas -i DEST DEST
-importas -i DESTRC DESTRC
-importas -i SRCRC SRCRC
-
-foreground {
-	if { s6-echo -- "............................................." }
-	if { s6-echo -- "..        Intializing Stage 2              .." }
-	s6-echo -- "............................................."
-}
-
-if -nt {
-	# Start services
-	if { s6-rc-init -l ${DESTRC} -c ${SRCRC}/current ${DEST}/service }
-	if { s6-rc -l ${DESTRC} -u change All }
-	if { s6-echo -- "............................................." }
-	if { s6-echo -- "..           End of Stage 2                .." }
-	s6-echo -- "............................................."
-}
-redirfd -r 0 /dev/console
-redirfd -w 1 /dev/console
-fdmove -c 2 1
-foreground { 
-	if { s6-echo -- "Something wrong on stage2, please see the log at ${DEST}/uncaught-logs/current to debug it" }
-	if { s6-echo -- "tty6 should be operational, to pass to press ALT+CTRL+F6." }
-	s6-echo -- "Use the interactive shell below if you are not able to pass to tty6."
-}
-/bin/sh -i
+if { s6-rc-init -c /etc/s6-linux-init/compiled/current /run/service } s6-rc -u change All

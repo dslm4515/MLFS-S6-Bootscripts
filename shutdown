@@ -1,33 +1,19 @@
-#! /bin/bash
+#!/bin/execlineb -S0
 
-usage() {
-    cat << EOF
-Usage: shutdown [OPTION]
- -r, -R, --reboot      Reboot
- -p, -P, --poweroff    Poweroff
-EOF
-    exit 0
-}
+foreground { s6-echo "Syncing disks." }
+foreground { s6-sync }
+foreground { s6-echo "Sending all processes the TERM signal." }
+foreground { s6-nuke -th }
+s6-sleep 3
+foreground { s6-echo "Sending all processes the KILL signal." }
+foreground { s6-nuke -k }
+wait { }
 
-scandir=$(head -n1 /etc/s6-linux-init/env/DEST)
+foreground { s6-echo "Syncing disks." }
+foreground { s6-sync }
+foreground { s6-echo "Unmounting disks." }
+foreground { s6-umount -a }
+foreground { s6-mount -o remount,ro / }
 
-signal="${1}"
-if [ -z $signal ]; then
-    usage
-fi
-
-case "${signal}" in
-    -p|-P|--poweroff|-h|-H|--halt)
-        signal="SIGQUIT"
-        ;;
-    -r|-R|--reboot)
-        signal="SIGINT"
-        ;;
-    #-h|-H|--halt)
-        #       signal="SIGUSR2"
-        #       ;;
-    *)
-       usage
-esac
-
-exec "${scandir}"/service/.s6-svscan/"${signal}"
+foreground { s6-echo "\nPerforming "${1}"." }
+s6-${1} -f
