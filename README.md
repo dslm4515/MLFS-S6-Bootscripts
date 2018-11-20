@@ -16,6 +16,14 @@ s6-portable-utils
 s6-rc
 s6-linux-init
 
+Directions:
 
+Copy boot directories and scripts. Do not just copy entire git directory, as it will copy unneeded dot files:
+```
+mkdir -pv /etc/s6-linux-init
+cp -rv ./{classic,compiled,env,fs-env,rc,scripts} /etc/s6-linux-init/
+cp -v ./{init,poweroff,reboot,s6.conf,shutdown,stage*} /etc/s6-linux-init/
+ln -svf /etc/s6-linux-init/init /sbin/init
+```
 
 ** This is still a work in porgress, and may not boot. Please wait for the first release **
