@@ -1,9 +1,9 @@
 # Musl-LFS-s6-Bootscripts
 Bootscripts for Musl-LFS (MLFS) using S6
 
-This is based on the works of Obarun Linux (http://web.obarun.org/) and Skarnet (https://skarnet.org/).
+This is based on the works of Obarun Linux (http://web.obarun.org/), Skarnet (https://skarnet.org/), and ideas from reddit user VerbosePineMarten.
 
-The aim of this project is to create the scripts and files to boot a MLFS system with S6 and S6-rc. This will replace the LFS bootscripts that LFS uses to boot a LFS system with SysVinit or systemD.
+The aim of this project is to create the scripts and files to boot a MLFS/LFS system with S6 and S6-rc. This will replace the LFS bootscripts that LFS uses (to boot a LFS system with SysVinit or systemD).
 
 ## Requirements
 
@@ -16,7 +16,7 @@ The following can be found at Skarnet (https://skarnet.org/)
   * s6-rc
   * s6-linux-init
 
-## Directions:
+## Directions
 
 Copy boot directories and scripts. Do not just copy entire git directory, as it will copy unneeded dot files:
 ```
@@ -28,4 +28,20 @@ ln -svf /etc/s6-linux-init/init /sbin/init
 s6-rc-compile /etc/s6-linux-init/srvdb /etc/s6-linux-init/rc
 ```
 
-** This is still a work in porgress, and may not boot. Please wait for the first release **
+## Layout
+
+Directories:
+  * env - environment variables used in services
+  * fs-env - environment variables used in mounting filesystems
+  * rc - source for the compiled service database
+  * run-image - directory that is copied to /run by init
+  * scripts - scripts used by services
+  * srvdb - compiled service database (compiled from rc)
+
+Scripts:
+  * init - stage 1
+  * poweroff
+  * rc.init - stage 2
+  * rc.tini - stage 3
+  * reboot
+  * s6.conf - settings to customize boot
