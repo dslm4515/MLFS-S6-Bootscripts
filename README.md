@@ -8,13 +8,13 @@ The aim of this project is to create the scripts and files to boot a MLFS system
 ## Requirements
 
 The following can be found at Skarnet (https://skarnet.org/)
-skalibs
-execline
-s6
-s6-linux-utils
-s6-portable-utils
-s6-rc
-s6-linux-init
+  * skalibs
+  * execline
+  * s6
+  * s6-linux-utils
+  * s6-portable-utils
+  * s6-rc
+  * s6-linux-init
 
 ## Directions:
 
