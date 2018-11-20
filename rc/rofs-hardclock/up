@@ -10,6 +10,6 @@ foreground {
         pipeline { tr A-Z a-z } 
         forstdin -- clock
         importas -iu -D "" clock clock
-        hwclock --systz --${clock} --noadjfile
+        /sbin/hwclock --systz --${clock} --noadjfile
 }
 s6-echo -- rofs-hardclock successfully started

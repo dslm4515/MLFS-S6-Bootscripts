@@ -22,10 +22,10 @@ Copy boot directories and scripts. Do not just copy entire git directory, as it 
 ```
 # Enter chroot for target system first, otherwise adjust paths accordingly
 mkdir -pv /etc/s6-linux-init
-cp -rv ./{classic,compiled,env,fs-env,rc,scripts} /etc/s6-linux-init/
-cp -v ./{init,poweroff,reboot,s6.conf,shutdown,stage*} /etc/s6-linux-init/
+cp -rv ./{run-image,env,fs-env,rc,scripts} /etc/s6-linux-init/
+cp -v ./{init,poweroff,reboot,s6.conf,rc.shutdown,rc.init,rc.tini} /etc/s6-linux-init/
 ln -svf /etc/s6-linux-init/init /sbin/init
-s6-rc-compile /etc/s6-linux-init/classic/default /etc/s6-linux-init/rc
+s6-rc-compile /etc/s6-linux-init/srvdb /etc/s6-linux-init/rc
 ```
 
 ** This is still a work in porgress, and may not boot. Please wait for the first release **

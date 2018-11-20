@@ -3,8 +3,8 @@
 fdmove -c 2 1
 if { s6-echo -- udevd-udevrules started }
 if {
-        foreground { udevadm trigger --action=add --type=subsystems }
-        foreground { udevadm trigger --action=add --type=devices }
-        udevadm settle
+        foreground { /sbin/udevadm trigger --action=add --type=subsystems }
+        foreground { /sbin/udevadm trigger --action=add --type=devices }
+        /sbin/udevadm settle
 }
 s6-echo -- udevd-udevrules successfully started

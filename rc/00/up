@@ -65,7 +65,7 @@ foreground {
 # load hostname for earlier tty
 foreground {
 
-        if { s6-echo -- Define hostname }
+        if { s6-echo -- Setting hostname }
         importas -i S6CONF S6CONF
         s6-envdir ${S6CONF}
         importas -i HOSTNAME HOSTNAME

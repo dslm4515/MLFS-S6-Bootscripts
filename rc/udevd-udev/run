@@ -1,5 +1,4 @@
 #!/bin/execlineb -P
 fdmove -c 2 1
 if { s6-echo -- udevd-udev longrun started }
-exec -c
-udevd
+exec -c /sbin/udevd

@@ -1,19 +1,20 @@
 #!/bin/execlineb -S0
 
+cd /
+redirfd -w 2 /dev/console
+fdmove -c 1 2
+foreground { s6-svc -X -- "/run"/service/s6-svscan-log }
+unexport ?
+wait -r -- { }
 foreground { s6-echo "Syncing disks." }
 foreground { s6-sync }
 foreground { s6-echo "Sending all processes the TERM signal." }
 foreground { s6-nuke -th }
-s6-sleep 3
+s6-sleep -m -- 2000
 foreground { s6-echo "Sending all processes the KILL signal." }
 foreground { s6-nuke -k }
 wait { }
-
-foreground { s6-echo "Syncing disks." }
-foreground { s6-sync }
 foreground { s6-echo "Unmounting disks." }
 foreground { s6-umount -a }
-foreground { s6-mount -o remount,ro / }
-
-foreground { s6-echo "\nPerforming "${1}"." }
+foreground { s6-mount -ro remount /dev/root / }
 s6-${1} -f

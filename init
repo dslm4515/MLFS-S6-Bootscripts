@@ -4,10 +4,9 @@
 /bin/cd /
 s6-setsid -qb --
 umask 022
-if { s6-echo -- "\n  Welcome to MLFS with S6 \n\n" }
+if { s6-echo -- "\n  init created by s6-linux-init-maker\n  see http://skarnet.org/software/s6-linux-init/\n\n" }
 if { s6-mount -nwt tmpfs -o mode=0755 tmpfs "/run" }
-if { s6-hiercopy "/etc/s6-linux-init"/classic "/run" }
-if { s6-mount -nt devtmpfs dev /dev }
+if { s6-hiercopy "/etc/s6-linux-init"/run-image "/run" }
 emptyenv -p
 s6-envdir -I -- "/etc/s6-linux-init"/env
 redirfd -r 0 /dev/null
@@ -17,7 +16,7 @@ background
   s6-setsid --
   redirfd -w 1 "/run"/service/s6-svscan-log/fifo
   fdmove -c 1 2
-  "/etc/s6-linux-init/stage2"
+  "/etc/s6-linux-init/rc.init"
 }
 unexport !
 cd "/run"/service

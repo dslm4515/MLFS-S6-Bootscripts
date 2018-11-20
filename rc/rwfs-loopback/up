@@ -2,5 +2,5 @@
 
 fdmove -c 2 1
 if { s6-echo -- rwfs-loopback started }
-if { ip link set up dev lo }
+if { /sbin/ip link set up dev lo }
 s6-echo -- rwfs-loopback successfully started

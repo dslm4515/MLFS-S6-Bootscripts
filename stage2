@@ -1,3 +1,0 @@
-#!/bin/execlineb -P
-
-if { s6-rc-init -c /etc/s6-linux-init/compiled/current /run/service } s6-rc -u change All
