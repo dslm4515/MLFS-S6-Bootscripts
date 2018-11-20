@@ -1,0 +1,7 @@
+#!/bin/execlineb -P
+
+fdmove -c 2 1
+if { s6-echo -- rwfs-nonetwork started }
+if { mount -a -t "nosysfs,nonfs,nonfs4,nosmbfs,nocifs" -O no_netdev }
+s6-echo -- rwfs-nonetwork successfully started
+
