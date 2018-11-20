@@ -2,13 +2,14 @@
 
 fdmove -c 2 1
 importas -i S6CONF S6CONF
+/bin/export PATH "/sbin:/bin:/usr/sbin:/usr/bin"
 s6-envdir ${S6CONF}
 importas -D "" FORCECHCK FORCECHCK
 ifelse -X { s6-test $FORCECHCK = yes }
         {
                 redirfd -w 1 /dev/console
                 if { s6-echo -- Check of filesystem was asked, please wait }
-                foreground { fsck -A -T -a -f noopts=_netdev }
+                foreground { /sbin/fsck -A -T -a -f noopts=_netdev }
                 s6-echo -- Filesystem checked
 }
 
@@ -16,6 +17,6 @@ ifelse -X { s6-test $FORCECHCK = yes }
 # and a crash occurs, so whatever happens with fsck, the output need to be a success
 if -t {
     if { s6-echo -- checkfs-fsckeck started }
-    fsck -A -T -a noopts=_netdev
+    /sbin/fsck -A -T -a noopts=_netdev
 }
 s6-echo -- checkfs-fscheck successfully started

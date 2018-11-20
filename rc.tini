@@ -1,3 +1,3 @@
 #!/bin/execlineb -P
 
-s6-true
+s6-rc -da

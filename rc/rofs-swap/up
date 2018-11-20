@@ -6,7 +6,7 @@ importas -D "" USESWAP USESWAP
 ifelse -X { s6-test $USESWAP = yes }
         {
                 if { s6-echo -- rofs-swap started }
-                foreground { swapon -a }
+                foreground { /sbin/swapon -a }
                 s6-echo -- rofs-swap successfully started
         }
 s6-echo -- rofs-swap deactived
