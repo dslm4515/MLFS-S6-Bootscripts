@@ -4,7 +4,7 @@
 /bin/cd /
 s6-setsid -qb --
 umask 022
-if { s6-echo -- "\n  init created by s6-linux-init-maker\n  see http://skarnet.org/software/s6-linux-init/\n\n" }
+if { s6-echo -- "\n-- Welcome to MLFS with S6-rc! --\n\n" }
 if { s6-mount -nwt tmpfs -o mode=0755 tmpfs "/run" }
 if { s6-hiercopy "/etc/s6-linux-init"/run-image "/run" }
 emptyenv -p

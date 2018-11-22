@@ -1,7 +1,8 @@
 #!/bin/execlineb -P
+
 fdmove -c 2 1
 importas -i S6CONF S6CONF
-if { s6-echo -- rofs-hardclock started }
+if { s6-echo -- [ >>>> ] rofs-hardclock started }
 foreground {
         s6-envdir ${S6CONF}
         importas -D "" TZ TZ
@@ -10,6 +11,6 @@ foreground {
         pipeline { tr A-Z a-z } 
         forstdin -- clock
         importas -iu -D "" clock clock
-        /sbin/hwclock --systz --${clock} --noadjfile
+        hwclock --systz --${clock} --noadjfile
 }
-s6-echo -- rofs-hardclock successfully started
+s6-echo -- [ DONE ] rofs-hardclock successfully started

@@ -1,11 +1,11 @@
 #!/bin/execlineb -P
 
 fdmove -c 2 1
-if { s6-echo -- rwfs-tmpdir started }
+if { s6-echo -- [ >>>> ] rwfs-tmpdir started }
 
 foreground {
-        if { s6-echo -- Create /tmp directory }
-        mkdir -p -m1777 /tmp
+	if { s6-echo -- Create /tmp directory }
+	mkdir -p -m1777 /tmp
 }
 
-s6-echo -- rwfs-tmpdir successfully started
+s6-echo -- [ DONE ] rwfs-tmpdir successfully started

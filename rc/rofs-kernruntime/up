@@ -1,4 +1,5 @@
 #!/bin/execlineb -P
+
 fdmove -c 2 1
 importas -i S6CONF S6CONF
 s6-envdir ${S6CONF}
@@ -7,8 +8,8 @@ ifelse -X { s6-test $KERNELRUNTIME = yes }
         { 
                 if { s6-test -x /usr/bin/sysctl }
                 if { s6-test -e /etc/sysctl.conf }
-                if { s6-echo -- rofs-kernruntime started }
+                if { s6-echo -- [ >>>> ] rofs-kernruntime started }
                 foreground { sysctl -p /etc/sysctl.conf }
-                s6-echo -- rofs-kernruntime successfully started
+                s6-echo -- [ DONE ] rofs-kernruntime successfully started
         }
-s6-echo -- rofs-kernruntime deactived
+s6-echo -- [ WW ] rofs-kernruntime deactivated

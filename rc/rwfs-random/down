@@ -1,16 +1,24 @@
-#!/bin/execlineb -P
+#!/usr/local/bin/execlineb -P
+# Copyright (c) 2015-2018 Eric Vidal <eric@obarun.org>
+# All rights reserved.
+# 
+# This file is part of Obarun. It is subject to the license terms in
+# the LICENSE file found in the top-level directory of this
+# distribution and at https://github.com/Obarun/s6-boot/LICENSE
+# This file may not be copied, modified, propagated, or distributed
+# except according to the terms contained in the LICENSE file.
 
 fdmove -c 2 1
 backtick -n bytes { cat /proc/sys/kernel/random/poolsize }
 importas -u bytes bytes
 if -t {
-        foreground {
-                if { s6-test -z $bytes }
-                define defbytes 512
-                umask 077
-                dd if=/dev/urandom of=/var/lib/random-seed count=1 bs=$defbytes
-                }
-        true
+	foreground {
+		if { s6-test -z $bytes }
+		define defbytes 512
+		umask 077
+		dd if=/dev/urandom of=/var/lib/random-seed count=1 bs=$defbytes
+		}
+	true
 }
 umask 077
 dd if=/dev/urandom of=/var/lib/random-seed count=1 bs=$bytes

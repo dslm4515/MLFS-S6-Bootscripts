@@ -1,6 +1,6 @@
 #!/bin/execlineb -P
 
 fdmove -c 2 1
-if { s6-echo -- rwfs-fsrw started }
+if { s6-echo -- [ >>>>] rwfs-fsrw started }
 if { s6-mount -o remount,rw / / }
-s6-echo -- rwfs-fsrw successfully started
+s6-echo -- [ DONE ] rwfs-fsrw successfully started

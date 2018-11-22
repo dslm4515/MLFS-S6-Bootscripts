@@ -1,0 +1,17 @@
+#!/bin/sh
+
+export IN_BOOT=1
+echo "[ >>>> ] Starting networking interfaces...\n"
+for file in /etc/sysconfig/ifconfig.*
+  do
+    interface=${file##*/ifconfig.}
+      # Skip if $file is * (because nothing was found)
+      if [ "${interface}" = "*" ]
+        then
+          continue
+        fi
+    /sbin/ifup ${interface}
+    echo "[ ok ] ${interface}"
+  done
+echo "[ DONE] Network interface(s) setup"
+unset IN_BOOT

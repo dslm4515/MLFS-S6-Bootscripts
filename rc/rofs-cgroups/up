@@ -6,8 +6,8 @@ s6-envdir ${S6CONF}
 importas -D "" CGROUPS CGROUPS
 ifelse -X { s6-test $CGROUPS = yes }
         {
-                foreground {    
-                        if { s6-echo -- rofs-cgroups started }
+                foreground {
+                        if { s6-echo -- [ >>>> ] rofs-cgroups started }
                         if { mkdir -p -m 0755 /sys/fs/cgroup }
                         if { s6-mount -wt tmpfs cgroup /sys/fs/cgroup }
                         redirfd -r 0 /proc/cgroups
@@ -19,6 +19,6 @@ ifelse -X { s6-test $CGROUPS = yes }
                         if { s6-mkdir /sys/fs/cgroup/${i} }
                         foreground { s6-mount -t cgroup -o ${i} -- cgroup /sys/fs/cgroup/${i} }
                 }
-                s6-echo -- rofs-cgroups successfully started
+                s6-echo -- [ DONE ] rofs-cgroups successfully started
         }
-s6-echo -- rofs-cgroups desactived
+s6-echo -- [ WW ] rofs-cgroups desactived

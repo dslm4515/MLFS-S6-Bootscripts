@@ -21,8 +21,6 @@ wait { }
 
 foreground { s6-echo Syncing disks. }
 foreground { s6-sync }
-foreground { s6-echo -- Umount extra filesystem }
-foreground { umount -r -a -t nosysfs,noproc,nodevtmpfs,notmpfs }
 foreground { s6-echo -- Remount ro / }
 foreground { mount -o remount,ro / }
 

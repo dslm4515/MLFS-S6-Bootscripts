@@ -1,6 +1,7 @@
 #!/bin/execlineb -P
+
 fdmove -c 2 1
-if { s6-echo -- rofs-console started }
+if { s6-echo -- [ >>>> ]rofs-console started }
 importas -i S6CONF S6CONF
 s6-envdir ${S6CONF}
 importas -D "" TTY TTY
@@ -12,10 +13,11 @@ foreground {
         forbacktickx index { seq ${TTY} }
         importas -u -D "" index index
         bash -c "setfont ${FONT_MAP:+-m $FONT_MAP} ${FONT_UNIMAP:+-u $FONT_UNIMAP} $FONT -C /dev/tty${index}"
+        if { s6-echo -- [ ok ] Intialize tty{index} }
 }
 # special case for the earlier tty
 foreground { bash -c "setfont ${FONT_MAP:+-m $FONT_MAP} ${FONT_UNIMAP:+-u $FONT_UNIMAP} $FONT -C /dev/tty6" }
 foreground {
         loadkeys -q -u $KEYMAP 
 }
-s6-echo -- rofs-console successfully started
+s6-echo -- [ DONE ] rofs-console successfully started

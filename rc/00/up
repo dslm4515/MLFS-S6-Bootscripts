@@ -1,10 +1,10 @@
 #!/bin/execlineb -P
 
 fdmove -c 2 1
-if { s6-echo -- 00 started }
+if { s6-echo -- [ >>>>] 00 started }
 
 foreground {
-	if { s6-echo -- Mounting filesystem }
+	if { s6-echo -- [ >>>> ] Mounting virtual filesystems ... }
 	# mount proc sys dev run if doesn't exist
 	foreground {
 		forx -p first { proc sys dev run }
@@ -17,12 +17,11 @@ foreground {
                         importas -ui mountpoint mountpoint
                         importas -ui options options
                         s6-mount -o $options -t $fstype $device $mountpoint
+                        if { s6-echo -- [ ok ] $device }
 		}
 	}
-	# create needed directory on run if doesn't exist
-	# **add later, and assume /run was mounted**
 
-	# finaly mount /dev/shm /dev/pts
+	# finally mount /dev/shm /dev/pts
 	if {
 		forx -p third { shm pts }
 		importas -ui third third
@@ -30,22 +29,23 @@ foreground {
 				foreground {
 					if -n { mountpoint -q /dev/$third }
                                         if { s6-mkdir -p -m 0755 /dev/$third }
-                                        s6-envdir /etc/s6-linu-init/fs-env/$third
+                                        s6-envdir /etc/s6-linux-init/fs-env/$third
                                         importas -ui fstype fstype
                                         importas -ui device device
                                         importas -ui mountpoint mountpoint
                                         importas -ui options options
                                         s6-mount -o $options -n -t $fstype $device $mountpoint
+                                        if { s6-echo -- [ ok ] $device }}
 				}			
 			}	
 	}
-	s6-echo -- Filesystems were mounted successfully
+	s6-echo -- [ DONE ] Filesystems were mounted successfully
 
 }
 # parse s6.conf before loading environment
 foreground {
         
-        if { s6-echo -- Parsing s6-conf }
+        if { s6-echo -- [ >>>> ] Parsing s6-conf }
 
         importas -i S6CONF S6CONF
         foreground {
@@ -60,7 +60,7 @@ foreground {
                         s6-echo -- $value
                 }
         }
-        s6-echo -- s6-conf was parsed successfully
+        s6-echo -- [ DONE ] s6-conf was parsed successfully
 }
 # load hostname for earlier tty
 foreground {
@@ -71,4 +71,4 @@ foreground {
         importas -i HOSTNAME HOSTNAME
         s6-hostname ${HOSTNAME}
 }
-s6-echo -- 00 successfully started
+s6-echo -- [ DONE ] 00 successfully started

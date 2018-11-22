@@ -1,7 +1,7 @@
 #!/bin/execlineb -P
 
 fdmove -c 2 1
-if { s6-echo -- rwfs-cleanboot started }
+if { s6-echo -- [ >>>> ] rwfs-cleanboot started }
 if -t {
     foreground { install -m0664 -o root -g utmp /dev/null /run/utmp }
 }
@@ -16,4 +16,4 @@ if -t {
 if -t {
     foreground { install -dm1777 /tmp/.X11-unix /tmp/.ICE-unix }
 }
-s6-echo -- rwfs-cleanboot successfully started
+s6-echo -- [ DONE ] rwfs-cleanboot successfully started

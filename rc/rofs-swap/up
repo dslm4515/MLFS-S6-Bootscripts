@@ -1,12 +1,13 @@
 #!/bin/execlineb -P
+
 fdmove -c 2 1
 importas -i S6CONF S6CONF
 s6-envdir ${S6CONF}
 importas -D "" USESWAP USESWAP
 ifelse -X { s6-test $USESWAP = yes }
         {
-                if { s6-echo -- rofs-swap started }
-                foreground { /sbin/swapon -a }
-                s6-echo -- rofs-swap successfully started
+                if { s6-echo -- [ >>>>] rofs-swap started }
+                foreground { swapon -a }
+                s6-echo -- [ DONE ] rofs-swap successfully started
         }
-s6-echo -- rofs-swap deactived
+s6-echo -- [ WW ] rofs-swap deactivated
