@@ -22,6 +22,8 @@ Copy boot directories and scripts. Do not just copy entire git directory, as it 
 ```
 # Enter chroot for target system first, otherwise adjust paths accordingly
 cp -ar s6-rc /etc/
+# Compile the 'basic' database.
+s6-rc-compile /etc/db/compiled /etc/db-src/basic
 ```
 
 ## Layout
