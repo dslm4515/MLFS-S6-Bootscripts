@@ -28,15 +28,15 @@ cp -ar s6-rc /etc/
 
 Directories in s6-rc:
   * env - environment variables used in services
-  * fs-env - environment variables used in mounting filesystems
-  * rc - source for the compiled service database
+  * env-fs - environment variables used in mounting filesystems
+  * db - Compiled service databases (compiled from a db in db-src)
+  * db-src- Sources for the compiled service database
   * run-image - directory that is copied to /run by init
   * scripts - scripts used by services
-  * srvdb - compiled service database (compiled from rc)
 
 Scripts:
   * init - stage 1
   * poweroff
-  * rc.init - stage 2
-  * rc.tini - stage 3
+  * stage2- stage 2
+  * stage2.tini - stage 3
   * reboot
