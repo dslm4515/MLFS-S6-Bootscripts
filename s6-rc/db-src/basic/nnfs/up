@@ -1,0 +1,10 @@
+#!/bin/execlineb -P
+
+# Mount Non-network Filesystems 
+
+fdmove -c 2 1
+
+if { s6-echo -- [   nnFS   ] Mounting ... }
+if { mount -a -t "nosysfs,nonfs,nonfs4,nosmbfs,nocifs" -O no_netdev }
+if { s6-echo -- [   nnFS   ] Done. }
+

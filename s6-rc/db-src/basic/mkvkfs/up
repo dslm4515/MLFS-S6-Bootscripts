@@ -1,0 +1,57 @@
+#!/bin/execlineb -P
+
+# Mount Virtual Kernel Fileystems
+# And set hostname
+
+fdmove -c 2 1
+
+foreground {
+  if { s6-echo -- [    vKfs    ] Mounting ... }
+  foreground {
+    # mount proc sys dev run in parallel
+    #s6-envdir -if /etc/s6-rc/env-fs
+    forx -p first { proc sys dev run }
+      importas -ui -D "" first first
+      foreground {
+        if -n { mountpoint -q /$first }
+        s6-envdir /etc/s6-rc/env-fs/$first
+        importas -ui fstype fstype
+        importas -ui device device
+        importas -ui mountpoint mountpoint
+        importas -ui options options
+        s6-mount -o $options -t $fstype $device $mountpoint
+      }
+  }
+
+  # Create lvm user lock if needed
+  if {
+    forx -p second { lvm user lock }
+    importas -ui second second
+    foreground {
+      if -n { s6-test -d /run/$second }
+      s6-mkdir -p -m 0755 /run/$second
+    }
+  }
+
+  # Mount /dev/shm /dev/pts
+  if {
+    forx -p third { shm pts }
+    importas -ui third third
+      if {
+        foreground {
+          if -n { mountpoint -q /dev/$third }
+          if { s6-mkdir -p -m 0755 /dev/$third }
+          s6-envdir /etc/s6-rc/env-fs/$third
+          importas -ui fstype fstype
+          importas -ui device device
+          importas -ui mountpoint mountpoint
+          importas -ui options options
+          s6-mount -o $options -n -t $fstype $device $mountpoint
+        }
+      }
+  } 
+  s6-echo -- [   vKfs   ] Mounted
+}
+# Set hostname
+s6-echo -- [ Hostname ] Set as MLFS
+s6-hostname MLFS

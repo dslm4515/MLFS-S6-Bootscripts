@@ -1,0 +1,10 @@
+#!/bin/execlineb -P
+
+# Mount Root Filesystem Read-Write
+
+fdmove -c 2 1
+
+if { s6-echo -- [   FSro   ] Remounting RootFS as Read-Write... }
+if { s6-mount -o remount,rw / / }
+if { s6-echo -- [   FSro   ] RootFS is Read-Write. }
+

@@ -1,0 +1,15 @@
+#!/bin/execlineb -P
+
+# Setup loopback device
+# And set hostname
+
+fdmove -c 2 1
+
+foreground {
+  if { s6-echo -- [    Loopb    ] Setting up ... }
+  if { ip link set up dev lo }
+  s6-echo -- [   Loopb   ] Ready
+}
+# Set hostname
+s6-echo -- [ Hostname ] Set as MLFS
+s6-hostname MLFS

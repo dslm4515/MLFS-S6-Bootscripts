@@ -1,0 +1,9 @@
+#!/bin/execlineb -S0
+
+s6-envdir -if /etc/s6-rc/env
+
+if { s6-echo -- "[ Stage 2 ] Tini Shutdown ... \n" }
+cd /
+foreground { s6-rc -v 3 -l /run/boot/rc -da change }
+
+if { s6-echo -- "[ Stage 2 ] Tini Shudown Complete.\n" }

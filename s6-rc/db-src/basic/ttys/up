@@ -1,0 +1,14 @@
+#!/bin/execlineb -P
+
+# Launch the TTYs
+
+fdmove -c 2 1
+if { s6-echo -- [ TTYs ] Setting up... }
+foreground {
+  if { mkdir -p /run/boot/service/tty1 }
+  s6-hiercopy /etc/s6-rc/scripts/tty1 /run/boot/service/tty1
+  s6-chmod 0755 /run/boot/service/tty1/run
+  redirfd -a 1 /run/boot/service/tty1/run
+  if { s6-svscanctl -a /run/boot/service }
+}
+s6-echo -- [ TTYs ] Ready.

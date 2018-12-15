@@ -1,3 +1,0 @@
-#!/bin/execlineb -P
-
-exec -c /run/service/.s6-svscan/SIGQUIT

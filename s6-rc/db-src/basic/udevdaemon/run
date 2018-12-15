@@ -1,0 +1,11 @@
+#!/bin/execlineb -P
+
+# Intiate udev
+
+fdmove -c 2 1
+
+if { s6-echo -- [ Devices ] Starting udev... }
+exec -c
+udevd
+if { s6-echo -- [ Devices ] Done. }
+

@@ -1,0 +1,4 @@
+#!/bin/execlineb -P
+
+foreground { "/etc/s6-rc/shutdown" }
+s6-svscanctl -h -- "/run/boot"/service

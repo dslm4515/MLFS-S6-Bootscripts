@@ -1,9 +1,0 @@
-#!/bin/execlineb -P
-
-fdmove -c 2 1
-importas -i S6CONF S6CONF
-if { s6-echo -- [ >>>> ] rwfs-localtime started }
-s6-envdir ${S6CONF}
-importas -D "" TZ TZ
-if { s6-ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime }
-s6-echo -- [ DONE ] rwfs-localtime successfully started

@@ -1,9 +1,0 @@
-#!/bin/execlineb -P
-
-fdmove -c 2 1
-importas -i S6CONF S6CONF
-s6-envdir ${S6CONF}
-importas -D "" S6LOCAL S6LOCAL
-ifelse -X { s6-test $S6LOCAL = yes }
-{ exec -c /etc/s6/data/scripts/s6.local }
-s6-echo -- [ WW ] s6.local deactivated

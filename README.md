@@ -21,16 +21,12 @@ The following can be found at Skarnet (https://skarnet.org/)
 Copy boot directories and scripts. Do not just copy entire git directory, as it will copy unneeded dot files:
 ```
 # Enter chroot for target system first, otherwise adjust paths accordingly
-mkdir -pv /etc/s6-linux-init
-cp -rv ./{run-image,env,fs-env,rc,scripts} /etc/s6-linux-init/
-cp -v ./{init,poweroff,reboot,s6.conf,rc.shutdown,rc.init,rc.tini} /etc/s6-linux-init/
-ln -svf /etc/s6-linux-init/init /sbin/init
-s6-rc-compile /etc/s6-linux-init/srvdb /etc/s6-linux-init/rc
+cp -ar s6-rc /etc/
 ```
 
 ## Layout
 
-Directories:
+Directories in s6-rc:
   * env - environment variables used in services
   * fs-env - environment variables used in mounting filesystems
   * rc - source for the compiled service database
@@ -44,4 +40,3 @@ Scripts:
   * rc.init - stage 2
   * rc.tini - stage 3
   * reboot
-  * s6.conf - settings to customize boot
