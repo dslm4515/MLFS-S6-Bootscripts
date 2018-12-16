@@ -11,6 +11,6 @@ forx INTERFACE { ${FILES} }
  importas -u INTERFACE INTERFACE
  backtick IFACE { pipeline { echo ${INTERFACE} } cut -d . -f 2 }
  importas -nu IFACE IFACE
- /sbin/ifup ${IFACE
+ /sbin/ifup ${IFACE}
 
 s6-echo -- [ Network. ] Ready.
