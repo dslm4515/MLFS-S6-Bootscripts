@@ -38,7 +38,6 @@ Directories in s6-rc:
 
 Scripts:
   * init - stage 1
-  * poweroff
   * stage2- stage 2
-  * stage2.tini - stage 3
+  * stage3 - stage 3
   * reboot
