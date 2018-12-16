@@ -1,5 +1,0 @@
-# Default s6.local for LFS; add your custom commands here.
-# 
-# This is run by s6 before the user services are executed.
-# This file is declared as oneshot service on s6, do not try to launch any daemon with this file.
-# Do not forget to define your environment by a shebang.

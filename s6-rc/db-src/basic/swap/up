@@ -1,0 +1,10 @@
+#!/bin/execlineb -P
+
+# Enable swap
+
+fdmove -c 2 1
+if { s6-echo -- [ ..Swap.. ] Enabling swap... }
+foreground {
+  swapon -a
+}
+s6-echo -- [ ..Swap.. ] Activated.

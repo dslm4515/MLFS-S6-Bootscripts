@@ -1,7 +1,0 @@
-#!/bin/execlineb -P
-
-fdmove -c 2 1
-importas -i SCRIPTS SCRIPTS
-if { s6-echo rwfs-tmpfiles started }
-foreground { exec -c ${SCRIPTS}/tmpfiles.sh --create --verbose }
-s6-echo -- rwfs-tmpfiles successfully started

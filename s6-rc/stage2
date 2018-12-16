@@ -1,0 +1,24 @@
+#!/bin/execlineb -P
+# stage2
+
+s6-envdir -if /etc/s6-rc/env
+
+foreground {
+ if { s6-echo -- "[ Stage 2 ]  Loading ...\n" }
+}
+
+if -nt {
+ #Start services...
+ if { s6-rc-init -l /run/boot/rc -c /etc/s6-rc/db/compiled /run/boot/service }
+ if { s6-rc -v2 -l /run/boot/rc -u change default }
+ if { s6-echo -- "[ Stage 2 ] Complete.\n" } 
+}
+redirfd -r 0 /dev/console
+redirfd -w 1 /dev/console
+fdmove -c 2 1
+foreground {
+ if { s6-echo -- "[ !!!!!!! ] Stage 2 FAILED\n" }
+ if { s6-echo -- "Something wrong on stage2, please see the log at /run/boot/uncaught-logs/current to debug it.\n" }
+ # Eventualy run consoles bundle when default fails
+}
+/bin/bash -i
