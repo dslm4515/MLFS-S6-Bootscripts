@@ -22,6 +22,8 @@ Copy boot directories and scripts. Do not just copy entire git directory, as it 
 ```
 # Enter chroot for target system first, otherwise adjust paths accordingly
 cp -ar s6-rc /etc/
+# Create link for kernel to find init
+ln -sv /etc/s6-rc/init /sbin/init
 ```
 
 ## Layout
