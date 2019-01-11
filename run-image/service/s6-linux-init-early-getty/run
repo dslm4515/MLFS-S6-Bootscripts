@@ -1,3 +1,0 @@
-#!/bin/execlineb -P
-
-/sbin/agetty 38400 tty1

@@ -1,9 +1,0 @@
-rofs-cgroups
-rofs-kernmod
-rofs-console
-rofs-hardclock
-rofs-Udevd
-rofs-Checkfs
-rofs-modules
-rofs-swap
-rofs-kernruntime

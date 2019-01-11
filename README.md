@@ -21,27 +21,51 @@ The following can be found at Skarnet (https://skarnet.org/)
 Copy boot directories and scripts. Do not just copy entire git directory, as it will copy unneeded dot files:
 ```
 # Enter chroot for target system first, otherwise adjust paths accordingly
-mkdir -pv /etc/s6-linux-init
-cp -rv ./{run-image,env,fs-env,rc,scripts} /etc/s6-linux-init/
-cp -v ./{init,poweroff,reboot,s6.conf,rc.shutdown,rc.init,rc.tini} /etc/s6-linux-init/
-ln -svf /etc/s6-linux-init/init /sbin/init
-s6-rc-compile /etc/s6-linux-init/srvdb /etc/s6-linux-init/rc
+cp -ar s6 /etc/
+# Compile the 'basic' database.
+s6-rc-compile /etc/s6/db/default /etc/s6/db-src/basic
+# Create link database to use for boot
+ln -sv /etc/s6/db/default /etc/s6/db/current
+# Create link for Kernel to find init script
+ln -sv /etc/s6/init /sbin/init
+# Create links for poweroff and reboot
+ln -sv /usr/bin/s6-reboot /sbin/reboot
+ln -sv /usr/bin/s6-poweroff /sbin/poweroff
 ```
 
 ## Layout
 
-Directories:
+Directories in s6:
   * env - environment variables used in services
-  * fs-env - environment variables used in mounting filesystems
-  * rc - source for the compiled service database
+  * env-fs - environment variables used in mounting filesystems
+  * db - Compiled service databases (compiled from a database source in db-src)
+  * db-src- Sources to compile service database via "s6-rc-compile"
   * run-image - directory that is copied to /run by init
   * scripts - scripts used by services
-  * srvdb - compiled service database (compiled from rc)
 
-Scripts:
+## Scripts:
   * init - stage 1
-  * poweroff
-  * rc.init - stage 2
-  * rc.tini - stage 3
-  * reboot
-  * s6.conf - settings to customize boot
+  * stage2- stage 2
+  * stage2.tini - shutdown script
+  * stage3 - stage 3
+
+## Databases:
+  * Basic - Basic bootup to get machine to a command propmt with root filesystem in read-write mode, udev started and swap turned on
+  * default - Normal boot with service: acpid, consolekit, dbus, usbmuxd (for use with libimobiledevice) and setup network interfaces (i.e. wpa_supplicant and dhcpd)
+
+## Setting up Networking at Boot:
+```
+# install net-services:
+mkdir -v /lib/services
+cp -vr net-services/* /lib/services/
+# install helper scripts to bring up and down interfaces:
+cp -v if* /sbin/
+```
+Each interface should have configuration files in /etc/sysconfig. For example:
+```
+/etc/sysconfig/ifconfig.wlan0              # config for a wifi card
+/etc/sysconfig/wpa_supplicant-wlan0.conf   # config for wpa_supplicant for  same wifi card
+```
+
+Examples are in net-configs
+

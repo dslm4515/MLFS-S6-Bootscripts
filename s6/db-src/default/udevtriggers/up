@@ -1,0 +1,14 @@
+#!/bin/execlineb -P
+
+# Intiate udev devices & subsystems
+
+fdmove -c 2 1
+
+if { s6-echo -- [ Devices. ] Adding subsystems & devices to udev... }
+if {
+  foreground { udevadm trigger --action=add --type=subsystems }
+  foreground { udevadm trigger --action=add --type=devices }
+  udevadm settle
+}
+if { s6-echo -- [ Devices. ] Done. }
+
