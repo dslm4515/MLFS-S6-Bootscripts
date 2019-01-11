@@ -1,0 +1,10 @@
+#!/bin/execlineb -P
+
+# Launch the TTYs
+
+fdmove -c 2 1
+if { s6-echo -- [ ..TTY1.. ] Setting up... }
+
+/sbin/agetty 38400 tty1 linux 
+
+s6-echo -- [ ..TTY1.. ] Ready.
