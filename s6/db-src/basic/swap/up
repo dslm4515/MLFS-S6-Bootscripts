@@ -3,8 +3,8 @@
 # Enable swap
 
 fdmove -c 2 1
-if { s6-echo -- [ ..Swap.. ] Enabling swap... }
+
+if { s6-echo -- "[       swap     ] 1/1 : Enabling swap" }
 foreground {
   swapon -a
 }
-s6-echo -- [ ..Swap.. ] Activated.

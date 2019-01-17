@@ -12,7 +12,7 @@ emptyenv -p
 s6-setsid -qb --
 umask 022
 
-if { s6-echo -- "\n  Welcome to MLFS with S6" }
+if { s6-echo -- "\n  Welcome to LFS with S6" }
 
 if { s6-mount -nwt tmpfs -o mode=0755 tmpfs /run }
 

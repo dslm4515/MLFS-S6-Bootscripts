@@ -2,10 +2,10 @@
 
 #s6-envdir -if /etc/s6-rc/env
 
-if { s6-echo -- "[ Stage 2 ] Tini Shutdown ... \n" }
+if { s6-echo -- "[     Stage 2    ] Tini Shutdown ... \n" }
 cd /
 #foreground { s6-rc -v 3 -l /run/boot/rc -da change }
 s6-rc  -l /run/boot/rc -da change
 #redirfd -w 2 /dev/null s6-svscanctl -t  /run/boot/service
 
-if { s6-echo -- "[ Stage 2 ] Tini Shudown Complete.\n" }
+if { s6-echo -- "[     Stage 2    ] Tini Shudown Complete.\n" }

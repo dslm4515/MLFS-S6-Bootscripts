@@ -4,18 +4,5 @@
 
 fdmove -c 2 1
 
-if { s6-echo -- [ Consoles ] Setting up with unicode and font... }
-#foreground {
-#  if { s6-echo -- Setting TTYs to Unicode mode. }
-#  forbacktickx index { seq 5 }
-#  importas -u -D "" index index
-#  bash -c "unicode_start < /dev/tty${index}"
-#  if { s6-echo -- Setting up TTYs to Terminus font. }
-#  bash -c "setfont ter-i12n -C /dev/tty${index}"
-#
-#}
-#foreground {
-#  loadkeys -q -u us
-#}
-if { /etc/s6-rc/scripts/set-consoles }
-s6-echo -- [ Consoles ] Ready
+if { s6-echo -- "[    consoles    ] 1/1 : Setting up VTs" }
+if { /etc/s6/scripts/set-consoles }

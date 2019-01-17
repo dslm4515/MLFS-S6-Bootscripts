@@ -1,11 +1,14 @@
 #!/bin/execlineb -P
 
 # Setup Random Seed
+
 fdmove -c 2 1
-if { s6-echo -- [ .Random. ] Setting up... }
+
+if { s6-echo -- "[      random    ] 1/1 : Generating random seed..." }
 foreground {
   cp /var/lib/random-seed /dev/urandom
 }
+
 backtick -n bytes { cat /proc/sys/kernel/random/poolsize }
 importas -iu bytes bytes
 if -t {
@@ -17,7 +20,8 @@ if -t {
         }
         s6-true
 }
+
 umask 077
 foreground { dd if=/dev/urandom of=/var/lib/random-seed count=1 bs=$bytes }
 
-s6-echo -- [ .Random. ] Intialized.
+

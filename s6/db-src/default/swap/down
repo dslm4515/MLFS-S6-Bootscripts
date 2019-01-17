@@ -1,7 +1,0 @@
-#!/bin/execlineb -P
-
-# Turnoff swap
-
-fdmove -c 2 1
-if { s6-echo -- [ ..Swap.. ] Disabling swap... }
-swapoff -a
