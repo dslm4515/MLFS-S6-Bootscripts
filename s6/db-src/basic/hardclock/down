@@ -1,0 +1,8 @@
+#!/bin/execline -P
+
+# Save time & date to Hardware clock
+
+fdmove -c 2 1
+
+#hwclock --systohc --localtime
+s6-true

@@ -1,0 +1,5 @@
+remount-rw
+nonetwork
+loopback
+random
+cleanboot

@@ -1,0 +1,6 @@
+#! /bin/execlineb -P
+
+fdmove -c 2 1
+
+if { s6-echo -- "[    loopback    ] 1/1 : Setting up loopback device...." }
+if { ip link set up dev lo }

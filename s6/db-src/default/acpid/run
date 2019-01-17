@@ -2,4 +2,8 @@
 
 fdmove -c 2 1
 
+#s6-setuidgid 19:19
+
+#acpid -lfd 1 -s /run/runtime/acpid.socket -g log -p /run/runtime/acpid.pid
+#acpid -lfd 1 -g log -s /run/userv/acpid.socket -p /run/userv/acpid.pid
 acpid -lfd 1

@@ -33,6 +33,22 @@ ln -sv /usr/bin/s6-reboot /sbin/reboot
 ln -sv /usr/bin/s6-poweroff /sbin/poweroff
 ```
 
+Bootscripts require system boot with a initramfs image. It's unlcear why boot scripts work without an initramfs loaded at boot. You may use thses scripts from BLFS to build one. Script requires cpio installed.
+```
+# Copy the script to /sbin:
+cp -v mkinitrd/mkinitramfs /sbin
+chmod 0755 /sbin/mkinitramfs
+# Copy the configuration:
+mkdir -p /usr/share/mkinitramfs 
+cp -v  mkinitrd/init.in /usr/share/mkinitramfs/ 
+# To use, use the kernel version. For example if:
+uname -r
+# Outputs: 4.19.0-AMD64-RADEON-STABLE
+# then:
+mkinitramfs 4.19.0-AMD64-RADEON-STABLE
+
+```
+
 ## Layout
 
 Directories in s6:
@@ -53,6 +69,10 @@ Directories in s6:
   * Basic - Basic bootup to get machine to a command propmt with root filesystem in read-write mode, udev started and swap turned on
   * default - Normal boot with service: acpid, consolekit, dbus, usbmuxd (for use with libimobiledevice) and setup network interfaces (i.e. wpa_supplicant and dhcpd)
 
+## mkinitrd:
+  * mkinitramfs - Script to make a basic initramfs
+  * init.in - Configuration for script.
+
 ## Setting up Networking at Boot:
 ```
 # install net-services:
@@ -64,7 +84,7 @@ cp -v if* /sbin/
 Each interface should have configuration files in /etc/sysconfig. For example:
 ```
 /etc/sysconfig/ifconfig.wlan0              # config for a wifi card
-/etc/sysconfig/wpa_supplicant-wlan0.conf   # config for wpa_supplicant for  same wifi card
+/etc/sysconfig/wpa_supplicant-wlan0.conf   # config for wpa_supplicant for same wifi card
 ```
 
 Examples are in net-configs
