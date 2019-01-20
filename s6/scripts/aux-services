@@ -1,0 +1,37 @@
+#!/bin/bash
+
+#### Start Auxillary Services
+
+#s6-setuidgid 19:19
+
+exec 2>&1
+exec 1>/var/log/aux-serv/current.log
+
+## Script functions:
+
+#log(){
+# printf "%s %s %s\n" "$(date +"%Y-%m-%d %H:%M:%S")" "${FUNCNAME[1]} ::" "${@}"
+#}
+
+#start_db {
+#   #log "[      aux       ] Starting auxillary service database..."
+#   s6-echo -- "[      aux       ] Starting auxillary db..."
+#   s6-rc-init -l /run/boot/aux -c /etc/s6/auxdb/current -p aux /run/boot/service
+#   s6-rc -v 3 -l /run/boot/aux -u change All
+#}
+#
+#start() {
+#    
+#    svscanctl -an /run/boot/service 2>/dev/null
+#    start_db || exit 1
+#
+#}
+#
+#start
+
+
+
+svscanctl -an /run/boot/service 2> /dev/null
+s6-echo -- "[ AUX ] Starting aux db.."
+s6-rc-init -l /run/boot/aux -c /etc/s6/auxdb/current -p aux /run/boot/service
+s6-rc -v 3 -l /run/boot/aux -u change All

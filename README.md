@@ -33,6 +33,15 @@ ln -sv /usr/bin/s6-reboot /sbin/reboot
 ln -sv /usr/bin/s6-poweroff /sbin/poweroff
 ```
 
+For logging services, create the log user as root:
+```
+groupadd -g 19 log &&
+useradd -c "S6 Log User" -d /var/log/aux-serv \
+        -u 19 -g log -s /bin/false log
+# Create the directory
+install -m0755 -o 19 -g 19 -d /var/log/aux-serv
+```
+
 Bootscripts require system boot with a initramfs image. It's unlcear why boot scripts work without an initramfs loaded at boot. You may use thses scripts from BLFS to build one. Script requires cpio installed.
 ```
 # Copy the script to /sbin:
@@ -52,10 +61,12 @@ mkinitramfs 4.19.0-AMD64-RADEON-STABLE
 ## Layout
 
 Directories in s6:
+  * auxdb - Compiled service databases
+  * auxdb-src - Sources to compile service database
   * env - environment variables used in services
   * env-fs - environment variables used in mounting filesystems
-  * db - Compiled service databases (compiled from a database source in db-src)
-  * db-src- Sources to compile service database via "s6-rc-compile"
+  * db - Compiled boot databases (compiled from a database source in db-src)
+  * db-src- Sources to compile boot database via "s6-rc-compile"
   * run-image - directory that is copied to /run by init
   * scripts - scripts used by services
 
@@ -64,10 +75,11 @@ Directories in s6:
   * stage2- stage 2
   * stage2.tini - shutdown script
   * stage3 - stage 3
+  * aux-services - Launches [auxillary]  services that are not required for boot.
 
 ## Databases:
   * Basic - Basic bootup to get machine to a command propmt with root filesystem in read-write mode, udev started and swap turned on
-  * default - Normal boot with service: acpid, consolekit, dbus, usbmuxd (for use with libimobiledevice) and setup network interfaces (i.e. wpa_supplicant and dhcpd)
+  * default - Normal boot with services: acpid, consolekit, dbus, usbmuxd (for use with libimobiledevice) and setup network interfaces (i.e. wpa_supplicant and dhcpd). This loads the boot database and services database.
 
 ## mkinitrd:
   * mkinitramfs - Script to make a basic initramfs

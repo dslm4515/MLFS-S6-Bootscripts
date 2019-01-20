@@ -1,4 +1,0 @@
-#!/bin/execlineb -P
-#
-#
-/usr/sbin/usbmuxd -u -U usbmux
