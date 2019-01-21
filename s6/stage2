@@ -21,7 +21,7 @@ fdmove -c 2 1
 foreground {
  if { s6-echo -- "[     Stage 2    ]  F A I L E D !\n" }
  if { s6-echo -- "Something wrong on stage2, please see the log at /run/boot/uncaught-logs/current to debug it.\n" }
- if { s6-echo -- "You may need to remount / as rw." )
+ if { s6-echo -- "You may need to remount / as rw." }
  # Eventualy run consoles bundle when default fails
 }
 /bin/bash -i

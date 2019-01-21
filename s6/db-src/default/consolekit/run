@@ -1,9 +1,0 @@
-#!/bin/execlineb -P
-
-#if { mkdir /run/ConsoleKit }
-#        fdmove -c 2 7
-#        fdmove -c 1 7
-        fdmove -c 2 1
-#        s6-ipcclient /varlog/consolekit
-s6-setuidgid 19:19
-console-kit-daemon --no-daemon
