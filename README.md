@@ -23,9 +23,9 @@ Copy boot directories and scripts. Do not just copy entire git directory, as it 
 # Enter chroot for target system first, otherwise adjust paths accordingly
 cp -ar s6 /etc/
 # Compile the 'basic' database.
-s6-rc-compile /etc/s6/db/default /etc/s6/db-src/basic
+s6-rc-compile /etc/s6/db/basic /etc/s6/db-src/basic
 # Create link database to use for boot
-ln -sv /etc/s6/db/default /etc/s6/db/current
+ln -sv /etc/s6/db/basic /etc/s6/db/current
 # Create link for Kernel to find init script
 ln -sv /etc/s6/init /sbin/init
 # Create links for poweroff and reboot
