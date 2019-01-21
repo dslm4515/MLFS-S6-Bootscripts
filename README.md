@@ -78,7 +78,7 @@ Directories in s6:
   * aux-services - Launches [auxillary]  services that are not required for boot.
 
 ## Databases:
-  * Basic - Basic bootup to get machine to a command propmt with root filesystem in read-write mode, udev started and swap turned on
+  * Basic - Basic bootup to get machine to a command prompt with root filesystem in read-write mode, udev started and swap turned on
   * default - Normal boot with services: acpid, consolekit, dbus, usbmuxd (for use with libimobiledevice) and setup network interfaces (i.e. wpa_supplicant and dhcpd). This loads the boot database and services database.
 
 ## mkinitrd:
