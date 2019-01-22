@@ -6,4 +6,4 @@ fdmove -c 1 2
 foreground { s6-svc -X -- /run/boot/service/s6-svscan-log }
 unexport ?
 wait -r -- { }
-/etc/s6-rc/stage3 ${@}
+/etc/s6/stage3 ${@}
