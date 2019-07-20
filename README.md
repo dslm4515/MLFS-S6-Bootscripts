@@ -7,14 +7,14 @@ The aim of this project is to create the scripts and files to boot a MLFS/LFS sy
 
 ## Requirements
 
-The following can be found at Skarnet (https://skarnet.org/)
+The following can be found at Skarnet (https://skarnet.org/). Current versions of s6-* do not work with these boot scripts.
   * skalibs
   * execline
-  * s6
-  * s6-linux-utils
-  * s6-portable-utils
-  * s6-rc
-  * s6-linux-init
+  * s6 (2.7.2.2)
+  * s6-linux-utils (2.5.0.0)
+  * s6-portable-utils (2.2.1.2)
+  * s6-rc (0.4.1.0)
+  * s6-linux-init (0.4.0.0)
 
 ## Directions
 
