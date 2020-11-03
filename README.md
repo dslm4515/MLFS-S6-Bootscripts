@@ -15,6 +15,7 @@ The following can be found at Skarnet (https://skarnet.org/)
   * s6-portable-utils
   * s6-rc
   * s6-linux-init
+  * utmps
 
 ## Directions
 
@@ -40,6 +41,12 @@ useradd -c "S6 Log User" -d /var/log/aux-serv \
         -u 19 -g log -s /bin/false log
 # Create the directory
 install -m0755 -o 19 -g 19 -d /var/log/aux-serv
+```
+For the UTMPS service, create the utmps user as root:
+
+```
+useradd -c "UTMPS User" -d /run/utmps \
+        -u 13 -g utmp -s /bin/false log
 ```
 
 Bootscripts require system boot with a initramfs image. It's unlcear why boot scripts work without an initramfs loaded at boot. You may use thses scripts from BLFS to build one. Script requires cpio installed.
