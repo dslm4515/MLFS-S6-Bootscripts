@@ -1,7 +1,0 @@
-remount-rw
-tmpdir
-nonetwork
-loopback
-random
-cleanboot
-rwfs-end

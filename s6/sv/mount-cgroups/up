@@ -1,0 +1,6 @@
+#!/bin/execlineb -P
+envfile /etc/s6/s6.conf
+importas -iu CGROUP_MODE CGROUP_MODE
+importas -iu CGROUP_CONTROLLERS CGROUP_CONTROLLERS
+importas -iu HAVE_CONTROLLER1_GROUPS HAVE_CONTROLLER1_GROUPS
+exec sh /etc/s6/sv/mount-cgroups/shell_up $CGROUP_MODE $CGROUP_CONTROLLERS $HAVE_CONTROLLER1_GROUPS

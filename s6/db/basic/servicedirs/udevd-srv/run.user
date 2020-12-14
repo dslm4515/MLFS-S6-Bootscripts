@@ -1,0 +1,6 @@
+#!/bin/execlineb -P
+# Initiate udev
+fdmove -c 2 1
+if { s6-echo -- "[  udev-daemon   ] 1/1 : Starting udev..."  }
+exec -c
+udevd

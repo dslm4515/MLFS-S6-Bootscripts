@@ -1,7 +1,0 @@
-#!/bin/execlineb -P
-
-# Launch TTY3
-
-fdmove -c 2 1
-
-/sbin/agetty 38400 tty3 linux 

@@ -1,0 +1,21 @@
+#!/bin/execlineb -P
+# Check File Systems before Mounting
+fdmove -c 2 1
+if { s6-echo -- "[     checkfs    ] 1/1 : Checking Roofs ..." }
+# See if check is forced:
+envfile /etc/s6/s6.conf
+importas -iu FORCECHECK FORCECHECK
+
+ifelse -X { s6-test $FORCECHCK = yes }
+ {
+  redirfd -w 1 /dev/console
+  if { s6-echo -- Check of filesystem was asked, please wait }
+  foreground { fsck -A -T -a -f noopts=_netdev }
+  s6-echo -- "[     checkfs    ] Filesystem checked"
+}
+
+# if partition is checked, fsck return a fail exit
+# and a crash occurs, so whatever happens with fsck, the output need to be a success
+if -t {
+    fsck -A -T -a noopts=_netdev
+}

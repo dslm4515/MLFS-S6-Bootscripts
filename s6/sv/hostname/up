@@ -1,0 +1,4 @@
+#!/bin/execlineb -P
+if -t { test -s /etc/hostname } backtick -n HOSTNAME { head -1 /etc/hostname }
+importas -iu HOSTNAME HOSTNAME
+if -t { test -n $HOSTNAME } redirfd -w 1 /proc/sys/kernel/hostname echo $HOSTNAME

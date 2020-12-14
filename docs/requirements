@@ -1,0 +1,16 @@
+## Reguired file paths:
+
+/sbin/init ...................... required by kernel, executes s6-linux-init with arguments
+/usr/bin/sysusers ............... if esysusers is installed
+/usr/bin/module-load ............ Load kernel modules at boot
+/etc/vconsole.conf .............. Set key map and console font
+/sbin/mkinitramfs ............... create initramfs.img
+/sbin/ifup ...................... Brings up network interfaces
+/sbin/ifdown .................... Brings down network interfaces
+/usr/share/mkinitramfs/init.in .. config for mkinitramfs
+/bin/tmpfiles ................... for creating tempdirs
+
+## Required directories:
+
+/etc/sysconfig/ifconfig.* ....... To setup network interfaces during boot
+/lib/services ................... Helper scripts for ifup/ifdown
