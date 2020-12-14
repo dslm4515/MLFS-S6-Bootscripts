@@ -68,11 +68,12 @@ mkinitramfs 4.19.0-AMD64-RADEON-STABLE
 ## Layout
 
 Directories in s6:
-  * current - Base directory for s6-linut-init
-  * current/run-image - Directory copied to /run at beginning of boot
-  * current/scripts - Scripts to shutdown and start system via s6-linux-init
-  * current/env - Enviromental varibles to set at boot
-  * rc - Compiled databases for boot
+  * base - Base directory for s6-linut-init
+  * base/run-image - Directory copied to /run at beginning of boot
+  * base/scripts - Scripts to shutdown and start system via s6-linux-init
+  * base/env - Enviromental varibles to set at boot
+  * db - Compiled databases for boot
+  * db/current - Compiled database to use for boot
   * skel - Default startup/shutdown scripts
   * sv - Source definitions for databases and services
 
