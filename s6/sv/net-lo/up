@@ -1,0 +1,2 @@
+#!/usr/bin/execlineb -P
+exec ip link set up dev lo

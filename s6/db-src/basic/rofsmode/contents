@@ -1,9 +1,0 @@
-cgroups
-swap
-kernmod
-hardclock
-modules
-kernruntime
-udevd
-checkfs
-consoles

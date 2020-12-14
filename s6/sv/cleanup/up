@@ -1,0 +1,5 @@
+#!/usr/bin/execlineb -P
+foreground { install -m0664 -o root -g utmp /dev/null /run/utmp }
+foreground { if -t -n { test -e /var/log/wtmp } install -m0664 -o root -g utmp /dev/null /var/log/wtmp }
+foreground { if -t -n { test -e /var/log/btmp } install -m0600 -o root -g utmp /dev/null /var/log/btmp }
+foreground { rm -f /etc/nologin /forcefsck /forcequotacheck /fastboot }

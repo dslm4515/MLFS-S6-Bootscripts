@@ -1,0 +1,5 @@
+#!/usr/bin/execlineb -P
+envfile /etc/s6/s6.conf
+importas -iu HARDWARECLOCK HARDWARECLOCK
+foreground { if { test $HARDWARECLOCK = UTC } hwclock --systz --utc --noadjfile }
+foreground { if { test $HARDWARECLOCK = localtime } hwclock --systz --localtime --noadjfile }

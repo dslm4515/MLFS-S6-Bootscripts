@@ -1,0 +1,6 @@
+#!/usr/bin/execlineb -P
+foreground { udevd --daemon }
+foreground { redirfd -w 1 /dev/null udevadm trigger --action=add --type=subsystems }
+foreground { redirfd -w 1 /dev/null udevadm trigger --action=add --type=devices }
+foreground { redirfd -w 1 /dev/null udevadm settle }
+foreground { udevadm control --exit }

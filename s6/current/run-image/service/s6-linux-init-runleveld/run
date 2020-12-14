@@ -1,0 +1,7 @@
+#!/usr/bin/execlineb -P
+
+fdmove -c 2 1
+fdmove 1 3
+s6-ipcserver -1 -a 0700 -c 1 -- s
+s6-sudod -dt30000 --
+"/etc/s6/current"/scripts/runlevel

@@ -1,9 +1,0 @@
-#!/bin/execlineb -P
-
-# Turn off swap
-
-fdmove -c 2 1
-
-foreground {
-  swapooff -a
-}

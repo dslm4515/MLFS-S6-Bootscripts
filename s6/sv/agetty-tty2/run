@@ -1,0 +1,9 @@
+#!/usr/bin/execlineb -P
+envfile /etc/s6/s6.conf
+importas -sCiu GETTYS GETTYS
+backtick -n TTY { sh -c "echo ${PWD##*-}" }
+importas -iu TTY TTY
+forx GETTY { $GETTYS }
+	importas GETTY GETTY
+	if -t { test $TTY = $GETTY }
+	exec /usr/bin/agetty -L -8 $TTY 115200

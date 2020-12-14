@@ -1,0 +1,5 @@
+#!/usr/bin/execlineb -P
+
+fdmove -c 1 2
+redirfd -rnb 0 fifo
+s6-log -bpd3 -- 1 t /run/uncaught-logs

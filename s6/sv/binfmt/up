@@ -1,0 +1,2 @@
+#!/usr/bin/execlineb -P
+foreground { sh /etc/s6/sv/binfmt/shell_up }

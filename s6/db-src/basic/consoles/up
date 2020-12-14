@@ -1,8 +1,0 @@
-#!/bin/execlineb -P
-
-# setup Virtual Consoles
-
-fdmove -c 2 1
-
-if { s6-echo -- "[    consoles    ] 1/1 : Setting up VTs" }
-if { /etc/s6/scripts/set-consoles }

@@ -1,0 +1,5 @@
+#!/usr/bin/execlineb -P
+foreground {
+    if -n { test -d /run/tmpfiles.d } mkdir /run/tmpfiles.d
+}
+foreground { kmod static-nodes --format=tmpfiles --output=/run/tmpfiles.d/kmod.conf }

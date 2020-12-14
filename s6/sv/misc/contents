@@ -1,0 +1,7 @@
+hostname
+hwclock
+modules
+kmod-static-nodes
+tmpfiles-dev
+rc-local
+mkutmp

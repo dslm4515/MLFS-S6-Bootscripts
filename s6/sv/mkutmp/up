@@ -1,0 +1,7 @@
+#!/usr/bin/execlineb -P
+
+chgrp utmp /run/utmps 2>/dev/null
+chmod 0664 /run/utmps
+
+chgrp utmp /var/log/wtmp 2>/dev/null
+chmod 0644 /var/log/wtmp 2>/dev/null

@@ -1,0 +1,6 @@
+#!/usr/bin/execlineb -P
+
+redirfd -w 2 /dev/console
+fdmove -c 1 2
+foreground { s6-linux-init-echo -- "s6-svscan crashed. Rebooting." }
+s6-linux-init-hpr -fr

@@ -1,0 +1,3 @@
+#!/usr/bin/execlineb -P
+foreground { mount -a -O no_netdev }
+foreground { if { test -x /usr/bin/zfs } zfs mount -a }

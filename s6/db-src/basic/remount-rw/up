@@ -1,8 +1,0 @@
-#!/bin/execlineb -P
-
-# Mount Root Filesystem Read-Write
-
-fdmove -c 2 1
-
-if { s6-echo -- "[   remount-rw   ] 1/1 : Remounting as read-write"  }
-if { s6-mount -o remount,rw / / }

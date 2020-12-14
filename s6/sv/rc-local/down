@@ -1,0 +1,5 @@
+#!/usr/bin/execlineb -P
+elglob -0 scripts /etc/local.d/*.stop
+forx script { ${scripts} }
+	importas script script
+	sh -c "${script}"
