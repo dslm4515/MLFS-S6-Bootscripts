@@ -1,0 +1,5 @@
+#!/bin/execlineb -P
+foreground { if -n -t { test -d /var/log/dmesg } install -d -m 0755 -o s6log -g s6log /var/log/dmesg }
+envfile /etc/s6/sv/dmesg/conf
+importas -sCiu DIRECTIVES DIRECTIVES
+pipeline { dmesg } s6-setuidgid s6log exec -c s6-log -b -- ${DIRECTIVES} /var/log/dmesg

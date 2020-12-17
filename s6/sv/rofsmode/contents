@@ -1,0 +1,10 @@
+udev
+mount-cgroups
+swap
+hwclock
+hostname
+console-setup
+modules
+kernmod
+checkrootfs
+sysctl

@@ -1,7 +1,0 @@
-#!/bin/execlineb -P
-
-# Launch TTY1
-
-fdmove -c 2 1
-
-/sbin/agetty 38400 tty1 linux 

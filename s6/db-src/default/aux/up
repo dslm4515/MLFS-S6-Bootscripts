@@ -1,8 +1,0 @@
-#!/bin/execlineb -P
-
-# Start auxillary services
-
-fdmove -c 2 1
-
-if { /etc/s6/scripts/aux-services  }
-s6-echo -- "[      aux       ] 1/1 : Starting auxillary services..."

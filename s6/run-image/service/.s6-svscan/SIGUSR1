@@ -1,4 +1,0 @@
-#!/bin/execlineb -P
-
-foreground { /etc/s6/stage2.tini }
-s6-svscanctl -7 -- /run/boot/service

@@ -1,0 +1,24 @@
+#! /bin/bash
+
+## Create the base
+
+s6-linux-init-maker     \
+	-c /etc/s6/base \
+	-u root         \
+	-G "/sbin/agetty -L -8 tty1 115200" \
+	-L  \
+	-p "/bin:/sbin:/usr/bin" \
+	-m 022 \
+	-t 2 \
+	-D default \
+	-U utmp \
+	/BUILD/etc/s6/base
+
+## Modify scripts in base
+
+# For rc.init:
+### If your services are managed by s6-rc:
+### (replace /run/service with your scandir)
+#s6-rc-init -c /etc/s6/db/current /run/service
+
+# Check other scripts and only uncomment for s6 & s6-rc

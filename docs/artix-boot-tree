@@ -1,0 +1,37 @@
+default
+└── boot
+    ├── misc
+    │   ├── hostname
+    │   ├── hwclock
+    │   ├── kmod-static-nodes
+    │   ├── modules
+    │   ├── rc-local
+    │   └── tmpfiles-dev
+    ├── mount
+    │   ├── mount-cgroups
+    │   ├── mount-devfs
+    │   ├── mount-filesystems
+    │   ├── mount-net
+    │   ├── mount-procfs
+    │   ├── mount-sysfs
+    │   └── remount-root
+    ├── setup
+    │   ├── binfmt
+    │   ├── cleanup
+    │   ├── console-setup
+    │   ├── dmesg
+    │   ├── getty
+    │   ├── net-lo
+    │   ├── random-seed
+    │   ├── swap
+    │   ├── sysctl
+    │   ├── sysusers * uncomment contents if esysusers is installed *
+    │   └── tmpfiles-setup
+    └── udev
+        ├── udevadm
+        │   ├── udevadm-log
+        │   └── udevadm-srv
+        └── udevd
+            ├── udevd-log
+            └── udevd-srv
+
