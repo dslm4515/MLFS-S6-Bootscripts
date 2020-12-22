@@ -41,7 +41,7 @@ For logging services, create the log user as root:
 ```
 groupadd -g 983 s6log &&
 useradd -c "S6-Log User" -d / \
-        -u 983 -g s6log -s /usr/bin/nologin s6log
+        -u 983 -g s6log -s /usr/bin/false s6log
 ```
 For utmps, create a utmp user:
 ```
@@ -57,18 +57,15 @@ install -v -m755 mkinitrd/mkinitramfs /sbin/
 # Copy the configuration:
 mkdir -p /usr/share/mkinitramfs 
 install -v -m644 mkinitrd/init.in /usr/share/mkinitramfs/ 
-# To use, use the kernel version. For example if:
-uname -r
-# Outputs: 4.19.0-AMD64-RADEON-STABLE
-# then:
-mkinitramfs 4.19.0-AMD64-RADEON-STABLE
+# To use, use the kernel version:
+mkinitramfs $(uname -r)
 
 ```
 
 ## Layout
 
 Directories in s6:
-  * base - Base directory for s6-linut-init
+  * base - Base directory for s6-linux-init
   * base/run-image - Directory copied to /run at beginning of boot
   * base/scripts - Scripts to shutdown and start system via s6-linux-init
   * base/env - Enviromental varibles to set at boot
