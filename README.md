@@ -29,12 +29,15 @@ install -v -m755 tmpfiles /bin/
 # Compile a basic database for boot
 s6-rc-compile /etc/s6/db/basic /etc/s6/sv 
 ln -sv /etc/s6/db/basic /etc/s6/db/current
+# Copy necessary scripts to boot, reboot, and poweroff system
+install -v -m755 s6/base/bin/* /sbin/
+mv /etc/s6/base/scripts /etc/s6/scripts
 # Re-initialize s6 init base
+rm -rf /etc/s6/base
 s6-linux-init-maker -1 -f /etc/s6/skel -p "/bin:/sbin:/usr/bin"    \
                     -D default -G "/sbin/agetty -L -8 tty1 115200" \
                     -c /etc/s6/base -t 2 -L -u root -U utmp /etc/s6/base
-# Copy necessary scripts to boot, reboot, and poweroff system
-install -v -m755 s6/base/bin/* /sbin/
+rm -rf /etc/s6/base/scripts
 # Copy scripts to bring NIC's up and down
 install -v -m755 if* /sbin/
 mkdir -pv /lib/services
