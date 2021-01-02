@@ -12,7 +12,7 @@ The following can be found at Skarnet (https://skarnet.org/).
   * execline
   * s6 (2.9.1.x)
   * s6-linux-utils
-  * s6-portable-utils
+  * s6-portable-utils (statically built)
   * s6-rc (0.5.x.x)
   * s6-linux-init (1.x.x.x)
   * utmps
@@ -29,6 +29,10 @@ install -v -m755 tmpfiles /bin/
 # Compile a basic database for boot
 s6-rc-compile /etc/s6/db/basic /etc/s6/sv 
 ln -sv /etc/s6/db/basic /etc/s6/db/current
+# Re-initialize s6 init base
+s6-linux-init-maker -1 -f /etc/s6/skel -p "/bin:/sbin:/usr/bin"    \
+                    -D default -G "/sbin/agetty -L -8 tty1 115200" \
+                    -c /etc/s6/base -t 2 -L -u root -U utmp /etc/s6/base
 # Copy necessary scripts to boot, reboot, and poweroff system
 install -v -m755 s6/base/bin/* /sbin/
 # Copy scripts to bring NIC's up and down
