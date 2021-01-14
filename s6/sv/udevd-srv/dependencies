@@ -1,1 +1,3 @@
+mount-procfs
+mount-devfs
 mount-sysfs

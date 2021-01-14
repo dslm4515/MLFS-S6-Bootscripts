@@ -2,7 +2,7 @@
 # Setup Random Seed
 fdmove -c 2 1
 
-if { s6-echo -- "[      random    ] 1/1 : Generating random seed..." }
+if { s6-echo -- "[  Random-Seed   ] Generating Random Seed" }
 foreground { umask 077; cp /var/lib/random-seed /dev/urandom }
 backtick -n bytes { cat /proc/sys/kernel/random/poolsize }
 importas -iu bytes bytes

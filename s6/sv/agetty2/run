@@ -1,2 +1,3 @@
 #!/bin/execlineb -P
+if { s6-echo -- "[  Enable VT's   ] 1/5 : Enabling tty2" }
 exec /sbin/agetty -L -8 tty2 115200

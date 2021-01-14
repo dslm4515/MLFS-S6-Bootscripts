@@ -3,9 +3,8 @@
 # Setup NICs for  Wifi and/or Ethernet
 
 fdmove -c 2 1
-if { s6-echo -- "[     network    ] 0/2 : Setting up WiFi & Ethernet..." }
+if { s6-echo -- "[   Networking   ] Bringing up any network interfaces..." }
 export IN_BOOT 1
-foreground { echo "[     network    ] 1/2 : Starting networking interfaces..." }
 elglob -0 FILES /etc/sysconfig/ifconfig.*
 forx INTERFACE { ${FILES} }
  importas -u INTERFACE INTERFACE
@@ -13,4 +12,4 @@ forx INTERFACE { ${FILES} }
  importas -nu IFACE IFACE
  /sbin/ifup ${IFACE}
 
-s6-echo --  "[     network    ] 2/2 : Network up."
+s6-echo --  "[   Networking   ] ...done."
