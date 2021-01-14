@@ -1,2 +1,3 @@
 #!/bin/execlineb -P
+if { s6-echo -- "[  Consle-setup  ] Setting VT font and keymap" }
 exec sh /etc/s6/sv/console-setup/shell_up

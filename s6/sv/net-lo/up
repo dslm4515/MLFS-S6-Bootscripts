@@ -2,5 +2,5 @@
 
 fdmove -c 2 1
 
-if { s6-echo -- "[    loopback    ] 1/1 : Setting up loopback device...." }
+if { s6-echo -- "[     Net-lo     ] Setting up loopback device..." }
 if { ip link set up dev lo }

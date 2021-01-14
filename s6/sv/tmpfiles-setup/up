@@ -1,2 +1,4 @@
 #!/bin/execlineb -P
+if { s6-echo -- "[    Tmpfiles    ] Setting up  TMP files"  }
+
 exec tmpfiles --exclude-prefix=/dev --create --remove --boot

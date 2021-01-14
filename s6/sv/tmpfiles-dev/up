@@ -1,2 +1,4 @@
 #!/bin/execlineb -P
+if { s6-echo -- "[    Tmpfiles    ] Creating TMP files"  }
+
 exec tmpfiles --prefix=/dev --create --boot

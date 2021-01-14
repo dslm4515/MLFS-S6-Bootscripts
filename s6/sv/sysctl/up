@@ -1,2 +1,3 @@
 #!/bin/execlineb -P
+if { s6-echo -- "[ System Control ] Setting kernel parameters " }
 redirfd -w 1 /dev/null sysctl --system
