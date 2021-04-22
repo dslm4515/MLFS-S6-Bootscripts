@@ -38,6 +38,8 @@ s6-linux-init-maker -1 -f /etc/s6/skel -p "/bin:/sbin:/usr/bin"    \
                     -D default -G "/sbin/agetty -L -8 tty1 115200" \
                     -c /etc/s6/base -t 2 -L -u root -U utmp /etc/s6/base
 rm -rf /etc/s6/base/scripts
+cp -r /etc/s6/scripts /etc/s6/base/scripts
+
 # Copy scripts to bring NIC's up and down
 install -v -m755 if* /sbin/
 mkdir -pv /lib/services
@@ -106,22 +108,20 @@ Each interface should have configuration files in /etc/sysconfig. For example:
 Examples are in net-configs
 
 ## Usage
-To modify services for bootup:
-```
-# To add
-s6-rc-bundle-update add    default service1 service2
-# To remove
-s6-rc-bundle-update delete default service1 service2
-```
 
-Other useful commands:
+To disable/enable services, modify the contents of `/etc/s6/sv/services/contents`. Then compile a new database to use for the next boot.
+
+For example, to enable dbus service:
 ```
-# Stop a service/bundle
-s6-rc -d change service_name
-# Start a service/bundle
-s6-rc -u change service_name
-# List all active services
-s6-rc -a list
-# List all services and bundles in the database
-s6-rc-db list all
+# Install dbus service scripts (dbus-srv, dbus-log) to /etc/s6/sv/
+
+# Add dbus script to list of services to start at boot:
+echo "dbus-srv" >> /etc/s6/sv/services/contents
+
+# Compile a new database for boot
+s6-rc-compile /etc/s6/db/new_db /etc/s6/sv
+
+# Link new database to boot
+mv -v /etc/s6/db/current /etc/s6/db/previous
+ln -sv /etc/s6/db/new_db /etc/s6/db/current
 ```
