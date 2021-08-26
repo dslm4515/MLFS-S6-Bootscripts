@@ -7,3 +7,4 @@ tmpfiles-dev
 tmpfiles-setup
 dmesg
 rwfsmode-end
+wtmps

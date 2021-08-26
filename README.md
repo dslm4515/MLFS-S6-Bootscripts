@@ -58,6 +58,13 @@ useradd -c "utmps user" -d /run/utmps \
         -u 984 -g utmp -s /bin/false utmp
 ```
 
+Make sure the directory for wtmp is owned by utmp user:
+```
+mkdir -pv /var/log/utmps
+mv -v /var/log/wtmp /var/log/utmps/
+chown -vR utmp:utmp /var/log/utmps
+ln -sv utmps/wtmp /var/log/wtmp
+```
 
 Bootscripts require system boot with a initramfs image. It's unlcear why boot scripts work without an initramfs loaded at boot. You may use thses scripts from BLFS to build one. Script requires cpio installed.
 ```
