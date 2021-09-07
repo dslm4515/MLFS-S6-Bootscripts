@@ -2,7 +2,7 @@
 
 fdmove -c 2 1
 if { s6-echo -- "[     wtmp       ] Initializing wtmp service ... " }
-...................................
+
 s6-setuidgid "utmp"
 cd /var/log/utmps
 s6-ipcserver -1 -c 1000 -- /var/log/utmps/.wtmpd-socket
