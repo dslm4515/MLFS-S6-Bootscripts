@@ -90,6 +90,7 @@ Directories in s6:
   * skel - Default startup/shutdown scripts
   * sv - Source definitions for databases and services
   * scripts - Small scripts used by services compiled from sv
+  * doc/mock-boot-tree - Use command tree to see how the layout of sv
 
 ## Scripts:
   * rc.local - Additional shell commands to execute on bootup
