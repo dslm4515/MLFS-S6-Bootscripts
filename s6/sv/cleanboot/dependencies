@@ -1,4 +1,0 @@
-remount-root
-checkrootfs
-tmpfiles-dev
-tmpfiles-setup

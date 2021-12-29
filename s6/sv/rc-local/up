@@ -1,7 +1,0 @@
-#!/bin/execlineb -P
-if { s6-echo -- "[    rc-local    ] Loading startup scripts" }
-foreground { sh /etc/s6/rc.local }
-elglob -0 scripts /etc/local.d/*.start
-forx script { ${scripts} }
-        importas script script
-        sh -c "${script}"

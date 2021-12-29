@@ -1,0 +1,12 @@
+#!/bin/execlineb -P
+fdmove -c 2 1
+if { s6-echo -- "[   Networking   ]     : Bringing up any network interfaces..." }
+export IN_BOOT 1
+elglob -0 FILES /etc/sysconfig/ifconfig.*
+forx INTERFACE { ${FILES} }
+ importas -u INTERFACE INTERFACE
+ backtick IFACE { pipeline { echo ${INTERFACE} } cut -d . -f 2 }
+ importas -nu IFACE IFACE
+ /sbin/ifup ${IFACE}
+
+if { s6-echo -- "[   Networking   ]     : Setup done" }

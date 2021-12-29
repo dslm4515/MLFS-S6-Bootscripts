@@ -1,5 +1,6 @@
 #!/bin/execlineb -P
+if { s6-echo "[     Shutdown   ]     : Saving sytem clock to rtc0" }
 envfile /etc/s6/s6.conf
 importas -iu HARDWARECLOCK HARDWARECLOCK
-foreground { if { test $HARDWARECLOCK = UTC } hwclock --systohc --utc --noadjfile }
-foreground { if { test $HARDWARECLOCK = localtime } hwclock --systohc --localtime --noadjfile }
+foreground { if { s6-test $HARDWARECLOCK = UTC } hwclock --systohc --utc --noadjfile }
+foreground { if { s6-test $HARDWARECLOCK = localtime } hwclock --systohc --localtime --noadjfile }

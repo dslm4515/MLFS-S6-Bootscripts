@@ -1,6 +1,3 @@
-#! /bin/execlineb -P
-
-fdmove -c 2 1
-
-if { s6-echo -- "[     Net-lo     ] Setting up loopback device..." }
-if { ip link set up dev lo }
+#!/bin/execlineb -P
+if { s6-echo "[ ReadWrite Mode ] 3/6 : Setting up network loopback device" }
+ip link set up dev lo
