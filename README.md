@@ -66,7 +66,7 @@ chown -vR utmp:utmp /var/log/utmps
 ln -sv utmps/wtmp /var/log/wtmp
 ```
 
-Bootscripts require system boot with a initramfs image. It's unlcear why boot scripts work without an initramfs loaded at boot. You may use thses scripts from BLFS to build one. Script requires cpio installed.
+Bootscripts no longer require system boot with a initramfs image. But kernel parameters should boot with root filesystem as read-only for checking root filesystem at boot (i.e. linux root=/dev/sda2 ro) You may use scripts from BLFS or Musl-LFS to build one. Script requires cpio installed.
 ```
 # Copy the script to /sbin:
 install -v -m755 mkinitrd/mkinitramfs /sbin/
@@ -89,6 +89,7 @@ Directories in s6:
   * db/current - Compiled database to use for boot
   * skel - Default startup/shutdown scripts
   * sv - Source definitions for databases and services
+  * scripts - Small scripts used by services compiled from sv
 
 ## Scripts:
   * rc.local - Additional shell commands to execute on bootup
@@ -116,19 +117,44 @@ Examples are in net-configs
 
 ## Usage
 
-To disable/enable services, modify the contents of `/etc/s6/sv/services/contents`. Then compile a new database to use for the next boot.
+To disable/enable services, modify the contents of `/etc/s6/sv/services/contents.d`. Then compile a new database to use for the next boot.
 
 For example, to enable dbus service:
 ```
 # Install dbus service scripts (dbus-srv, dbus-log) to /etc/s6/sv/
 
 # Add dbus script to list of services to start at boot:
-echo "dbus-srv" >> /etc/s6/sv/services/contents
+touch /etc/s6/sv/services/contents.d/dbus-srv
 
 # Compile a new database for boot
-s6-rc-compile /etc/s6/db/new_db /etc/s6/sv
+s6-rc-compile /etc/s6/db/${new_db} /etc/s6/sv
 
 # Link new database to boot
 mv -v /etc/s6/db/current /etc/s6/db/previous
-ln -sv /etc/s6/db/new_db /etc/s6/db/current
+ln -sv /etc/s6/db/${new_db} /etc/s6/db/current
 ```
+
+Services an be enabled or disabled after boot:
+```
+# Enable a service that was not enabled at boot
+sudo s6-rc -u change ${service_name}
+
+# Disable a service
+sudo s6-rc -d change ${service_name}
+
+# To see the list of services to enable/disable:
+ls /run/service/*
+
+```
+
+## Changelog since 4.x.x
+
+<ul>
+<li>Updated service format: Bundles now use a contents.d directory instead of a contents file</li>
+<li>Improved service dependacies: Previous format had issues some services starting before required service(s) executed</li>
+<li>/tmp directory now cleaned during boot and during shutdown </li>
+<li>System clock now set from hardware clock </li>
+<li>Most commands in service scripts use commands from s6-linux-utils or s6-portable-utils </li>
+<li>Cleaned up boot messages that are logged in /run/uncaught-logs/current </li>
+
+</ul>
