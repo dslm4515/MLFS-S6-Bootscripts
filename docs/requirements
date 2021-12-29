@@ -9,6 +9,9 @@
 /sbin/ifdown .................... Brings down network interfaces
 /usr/share/mkinitramfs/init.in .. config for mkinitramfs
 /bin/tmpfiles ................... for creating tempdirs
+/etc/s6/scripts/clean_tmp.sh .... Required by cleantmp service                                                                                        
+/etc/s6/scripts/mount-cgroups ... Required by the cgroups service                                                                                     
+/etc/s6/scripts/console_set.sh .. Required by the console service   
 
 ## Required directories:
 
