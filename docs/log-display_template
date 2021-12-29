@@ -1,38 +1,28 @@
-if { s6-echo -- ""  }
-
-[  Enable VT's   ] 1/5 : Enabling tty2
-[  Enable VT's   ] 2/5 : Enabling tty3
-[  Enable VT's   ] 3/5 : Enabling tty4
-[  Enable VT's   ] 4/5 : Enabling tty5
-[  Enable VT's   ] 5/5 : Enabling tty6
-[  Checkrootfs   ] Checking rootfs ...
-[  Checkrootfs   ] Check of filesystem was asked, please wait
-[  Checkrootfs   ] Rootfs was checked
-[   Cleanboot    ] 1/2 : Creating ICE-unix
-[   Cleanboot    ] 2/2 : Remvoving filesystem watermarks
-[  Consle-setup  ] Setting VT font and keymap
-[     dmesg      ] Logging kernel boot
-[    Hostname    ] Setting hostname
-[    HWclock     ] Setting system time from RTC
-[    HWclock     ] Saving system time to RTC
-[    Kernmod     ] Loading static kernel nodes
-[    Modules     ] Loading kernel modules
-[   Virtual KFS  ] 1/5 : Mounting cgroups
-[   Virtual KFS  ] 2/5 : Mounting devfs
-[   Virtual KFS  ] 3/5 : Mounting Nonetwork
-[   Virtual KFS  ] 4/5 : Mounting procfs
-[   Virtual KFS  ] 5/5 : Mounting sysfs
-[   Networking   ] Bringing up any network interfaces...
-[   Networking   ] ...done.
-[     Net-lo     ] Setting up loopback device...
-[  Random-Seed   ] Generating Random Seed
-[    rc-local    ] Loading startup scripts
-[  remount-root  ] Remounting root as read-write
-[      Swap      ] Enabling swap
-[      Swap      ] Disabling Swap
-[ System Control ] Setting kernel parameters
-[    Tmpfiles    ] Creating TMP files
-[    Tmpfiles    ] Setting up  TMP files
-[      udev      ] 1/2 : Starting udev ...
-[      udev      ] 2/2 :  Setting up devices & subsystems...
-
+|--((( S6+S6-rc Bootscripts v 5.0.0 )))---| 
+[   Virtual-FS   ] 1/6 : Mounting /proc
+[   Virtual-FS   ] 0/6 : Creating mount points
+[ Read-Only Mode ] 3/9 : Setting hostname
+[   Virtual-FS   ] 2/6 : Mounting /sys
+[   Virtual-FS   ] 5/6 : Mounting securityfs
+[   Virtual-FS   ] 6/6 : Mounting EFI-vars-fs
+[ Read-Only Mode ] 5/9 : Setting up Kernel Static Node(s)
+[   Virtual-FS   ] 3/6 : Mounting /dev/pts
+[   Virtual-FS   ] 4/6 : Mounting /dev/shm
+[ Read-Only Mode ] 8/9 : Intializing udev daemon
+[ Read-Only Mode ] 9/9 : Setting up devices & subsystems
+[ Read-Only Mode ] 1/9 : Mounting cgroups
+[    Services    ]     : Enabling tty3
+[    Services    ]     : Enabling tty2
+[ Read-Only Mode ] 0/9 : Setting kernel parameters
+[ Read-Only Mode ] 7/9 : Turning on any swap/swap-files
+[ Read-Only Mode ] 4/9 : Setting system clock from rtc0
+[ Read-Only Mode ] 6/9 : Loading any kernel modules
+[ Read-Only Mode ] 2/9 : Setting up console
+[ ReadWrite Mode ] 1/6 : Remounting root filesystem as rw
+[ ReadWrite Mode ] 4/6 : Restoring random seed
+[ ReadWrite Mode ] 2/6 : Logging kernel boot
+[ ReadWrite Mode ] 0/6 : Cleaning /tmp
+[ ReadWrite Mode ] 3/6 : Setting up network loopback device
+[ ReadWrite Mode ] 5/6 : Cleaning tempfiles
+[ ReadWrite Mode ] 6/6 : Setting up tmpfiles
+[   Networking   ]     : Bringing up any network interfaces...
