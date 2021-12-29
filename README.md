@@ -151,7 +151,7 @@ ls /run/service/*
 ## Changelog since 4.x.x
 
 <ul>
-<li>Updated service format: Bundles now use a contents.d directory instead of a contents file</li>
+<li>Updated service format: Bundles now use contents.d & dependencies.d directories instead of contents & dependencies files</li>
 <li>Improved service dependacies: Previous format had issues some services starting before required service(s) executed</li>
 <li>/tmp directory now cleaned during boot and during shutdown </li>
 <li>System clock now set from hardware clock </li>
