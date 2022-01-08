@@ -52,6 +52,12 @@ groupadd -g 983 s6log &&
 useradd -c "S6-Log User" -d / \
         -u 983 -g s6log -s /usr/bin/false s6log
 ```
+Make sure the directory for dmesg logging is owned by the log user
+```
+mkdir -pv /var/log/dmesg
+chown -v s6log:s6log /var/log/
+```
+
 For utmps, create a utmp user:
 ```
 useradd -c "utmps user" -d /run/utmps \
