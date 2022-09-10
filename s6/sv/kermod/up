@@ -1,4 +1,0 @@
-#!/bin/execlineb -P
-if { s6-echo "[ Read-Only Mode ] 5/9 : Setting up Kernel Static Node(s)" }
-foreground { if -n { test -d /run/tmpfiles.d } mkdir /run/tmpfiles.d }
-foreground { kmod static-nodes --format=tmpfiles --output=/run/tmpfiles.d/kmod.conf }

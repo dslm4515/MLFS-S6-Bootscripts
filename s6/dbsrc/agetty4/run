@@ -1,0 +1,3 @@
+#! /bin/sh
+s6-echo "[    Services    ]     : Enabling tty4" >> /run/bootserv.log 
+exec /sbin/agetty -L -8 tty4 115200

@@ -1,3 +1,0 @@
-#!/bin/execlineb -P
-if { s6-echo "[ ReadWrite Mode ] 6/6 : Setting up tmpfiles" }
-tmpfiles --prefix=/dev --create --boot

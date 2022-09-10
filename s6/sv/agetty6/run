@@ -1,3 +1,0 @@
-#!/bin/execlineb -P
-if { s6-echo "[    Services    ]     : Enabling tty6" }
-exec /sbin/agetty -L -8 tty6 115200 

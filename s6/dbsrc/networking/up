@@ -1,0 +1,16 @@
+#! /bin/sh
+
+s6-echo -- "[   Networking   ]     : Bringing up any network interfaces..."  >> /run/bootserv.log
+export IN_BOOT=1
+
+for file in /etc/sysconfig/ifconfig.*
+  do
+    interface=${file##*/ifconfig.}
+      # Skip if $file is * (because nothing was found)
+      if [ "${interface}" = "*" ]
+        then
+          continue
+        fi
+    /sbin/ifup ${interface}
+  done
+unset IN_BOOT

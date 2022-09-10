@@ -1,6 +1,0 @@
-#!/bin/sh
-#
-# Enter custom commands here. By default, they will be executed on startup with the
-# "boot" bundle before running services. If you need these commands to wait on certain
-# services being up, you can edit the /etc/s6/sv/rc-local/dependencies file and then
-# recompile the database.

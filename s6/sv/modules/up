@@ -1,3 +1,0 @@
-#!/bin/execlineb -P
-if { s6-echo "[ Read-Only Mode ] 6/9 : Loading any kernel modules" }
-sh -c "modules-load"

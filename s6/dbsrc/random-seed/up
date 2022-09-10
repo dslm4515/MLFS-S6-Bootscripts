@@ -1,0 +1,5 @@
+#!/bin/sh
+s6-echo "[ ReadWrite Mode ] 4/6 : Restoring random seed"  >> /run/bootserv.log 
+cp /var/lib/random-seed /dev/urandom >/dev/null 2>&1 || true
+( umask 077; dd if=/dev/urandom of=/var/lib/random-seed count=1 bs=512 >/dev/null 2>&1 )
+

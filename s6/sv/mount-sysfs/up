@@ -1,3 +1,0 @@
-#!/bin/execlineb -P
-if { s6-echo "[   Virtual-FS   ] 2/6 : Mounting /sys" }
-s6-mount -t sysfs -o nosuid,noexec,nodev sys /sys

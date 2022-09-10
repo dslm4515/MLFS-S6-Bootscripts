@@ -1,3 +1,0 @@
-#!/bin/execlineb -P
-if { s6-echo "[ ReadWrite Mode ] 3/6 : Setting up network loopback device" }
-ip link set up dev lo

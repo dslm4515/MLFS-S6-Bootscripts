@@ -1,0 +1,3 @@
+#! /bin/sh
+s6-echo "[    Shutdown   ] : Turning off any swap/swap-files"
+swapoff -a

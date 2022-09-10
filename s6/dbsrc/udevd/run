@@ -1,0 +1,4 @@
+#!/bin/sh
+# Initiate udev
+s6-echo "[ Read-Only Mode ] 8/9 : Intializing udev daemon"  >> /run/bootserv.log 
+/sbin/udevd

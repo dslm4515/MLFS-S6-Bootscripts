@@ -1,0 +1,11 @@
+#! /bin/sh
+
+. /etc/s6/s6.conf
+
+if [ "$FORCECHCK" = "yes"  ]
+then
+	s6-echo "[  Checkrootfs   ] >>>>> Check of filesystem was asked, please wait" >> /run/bootserv.log
+	fsck -A -T -a -f noopts=_netdev
+else
+	s6-echo "[  Checkrootfs   ] >>>>> Check of filesystem was skipped" >> /run/bootserv.log
+fi

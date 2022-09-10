@@ -1,2 +1,0 @@
-#!/bin/execlineb -P
-exec /sbin/agetty -L -8 tty3 115200

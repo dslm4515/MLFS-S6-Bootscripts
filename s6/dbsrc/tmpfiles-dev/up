@@ -1,0 +1,3 @@
+#!/bin/sh
+s6-echo "[ ReadWrite Mode ] 6/6 : Setting up tmpfiles"  >> /run/bootserv.log  
+tmpfiles --prefix=/dev --create --boot

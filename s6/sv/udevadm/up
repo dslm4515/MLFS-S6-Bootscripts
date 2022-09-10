@@ -1,9 +1,0 @@
-#!/bin/execlineb -P
-# Initiate udev devices & subsystems
-fdmove -c 2 1
-if { s6-echo "[ Read-Only Mode ] 9/9 : Setting up devices & subsystems" }
-if {
-  foreground { udevadm trigger --action=add --type=subsystems }
-  foreground { udevadm trigger --action=add --type=devices }
-  udevadm settle
-}

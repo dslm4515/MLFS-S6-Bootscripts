@@ -1,0 +1,10 @@
+#!/bin/sh
+s6-echo "[   Virtual-FS   ] 6/6 : Mounting EFI-vars-fs" >> /run/bootserv.log 
+
+if [ -d "/sys/firmware/efi" ]
+then
+ mountpoint -q /sys/firmware/efi/efivars || mount -n -t efivarfs -o ro efivarfs /sys/firmware/efi/efivars
+ s6-echo "[   Virtual-FS   ] 6/6 : System booted in UEFI mode" >> /run/bootserv.log
+else
+ s6-echo "[   Virtual-FS   ] 6/6 : System booted in BIOS/non-UEFI mode" >> /run/bootserv.log
+fi

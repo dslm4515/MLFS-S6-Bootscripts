@@ -1,0 +1,3 @@
+#! /bin/sh
+s6-echo "[    Services    ]     : Enabling tty5" >> /run/bootserv.log 
+exec /sbin/agetty -L -8 tty5 115200

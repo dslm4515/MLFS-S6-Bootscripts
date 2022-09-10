@@ -1,6 +1,0 @@
-#!/bin/execlineb -P
-# Initiate udev
-fdmove -c 2 1
-if { s6-echo "[ Read-Only Mode ] 8/9 : Intializing udev daemon"  }
-exec -c
-udevd

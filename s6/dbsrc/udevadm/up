@@ -1,0 +1,6 @@
+#!/bin/sh
+s6-echo "[ Read-Only Mode ] 9/9 : Setting up devices & subsystems" >> /run/bootserv.log 
+
+udevadm trigger --action=add --type=subsystems 
+udevadm trigger --action=add --type=devices 
+udevadm settle

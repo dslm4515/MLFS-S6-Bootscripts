@@ -1,3 +1,0 @@
-#!/bin/execlineb -P
-if { s6-echo "[ ReadWrite Mode ] 1/6 : Remounting root filesystem as rw" }
-s6-mount -o remount,rw / / 

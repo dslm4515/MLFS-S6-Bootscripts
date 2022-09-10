@@ -1,0 +1,3 @@
+#!/bin/sh
+s6-echo "[ Read-Only Mode ] 7/9 : Turning on any swap/swap-files" >> /run/bootserv.log
+swapon -a

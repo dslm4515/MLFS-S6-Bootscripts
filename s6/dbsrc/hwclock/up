@@ -1,0 +1,15 @@
+#! /bin/sh
+
+s6-echo "[ Read-Only Mode ] 4/9 : Setting system clock from rtc0" >> /run/bootserv.log
+. /etc/s6/s6.conf
+
+if [[ ${HARDWARECLOCK} = UTC || ${HARDWARECLOCK} = utc ]] ; then
+    HWC=$(echo $HARDWARECLOCK | tr A-Z a-z)
+    hwclock --hctosys --$HWC --noadjfile
+    s6-echo "[ Read-Only Mode ] 4/9 : Using 'UTC' for the hardware clock..."  >> /run/bootserv.log
+else
+    # If HARDWARECLOCK is anything else, commented, or null, then use 'localtime' as the default...
+    HWC=localtime
+    hwclock --hctosys --$HWC --noadjfile
+    s6-echo "[ Read-Only Mode ] 4/9 : Using 'localtime' for the hardware clock..." >> /run/bootserv.log
+fi
