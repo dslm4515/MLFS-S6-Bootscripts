@@ -5,6 +5,8 @@ This is based on the works of Artix Linux (http://www.artixlinux.org/), Skarnet 
 
 The aim of this project is to create the scripts and files to boot a MLFS/LFS system with S6 and S6-rc. This will replace the LFS bootscripts that LFS uses (to boot a LFS system with SysVinit).
 
+The bootscripts were written from excline to sh, to be executed by dash.
+
 ## Requirements
 
 The following can be found at Skarnet (https://skarnet.org/).
@@ -15,7 +17,7 @@ The following can be found at Skarnet (https://skarnet.org/).
   * s6-portable-utils (statically built)
   * s6-rc 0.5.3.x (New service format)
   * s6-linux-init (1.x.x.x)
-  * utmps
+  * utmps (optional for musl, not needed for Glibc).
 
 ## Directions
 
@@ -24,21 +26,26 @@ Copy boot directories and scripts. Do not just copy entire git directory, as it 
 # Enter chroot for target system first, otherwise adjust paths accordingly
 cp -ar s6 /etc/
 cp -av vconsole.conf /etc/
-install -v -m755 modules-load /usr/bin/
 install -v -m755 tmpfiles /bin/
+
 # Compile a basic database for boot
-s6-rc-compile /etc/s6/db/basic /etc/s6/sv 
+s6-rc-compile /etc/s6/db/basic /etc/s6/dbsrc 
 ln -sv /etc/s6/db/basic /etc/s6/db/current
-# Copy necessary scripts to boot, reboot, and poweroff system
-install -v -m755 s6/base/bin/* /sbin/
-mv /etc/s6/base/scripts /etc/s6/scripts
-# Re-initialize s6 init base
+
+# Re-initialize s6 init base (with utmps installed)
 rm -rf /etc/s6/base
-s6-linux-init-maker -1 -f /etc/s6/skel -p "/bin:/sbin:/usr/bin"    \
+s6-linux-init-maker -1 -f /etc/s6-linux-init/skel -p "/bin:/sbin:/usr/bin:/usr/sbin"    \
                     -D default -G "/sbin/agetty -L -8 tty1 115200" \
                     -c /etc/s6/base -t 2 -L -u root -U utmp /etc/s6/base
-rm -rf /etc/s6/base/scripts
-cp -r /etc/s6/scripts /etc/s6/base/scripts
+
+# Re-initialize s6 init base (without utmps installed)
+rm -rf /etc/s6/base
+s6-linux-init-maker -1 -f /etc/s6-linux-init/skel -p "/bin:/sbin:/usr/bin:/usr/sbin"    \
+                    -D default -G "/sbin/agetty -L -8 tty1 115200" \
+                    -c /etc/s6/base -t 2 -L -u root  /etc/s6/base
+
+# Copy necessary scripts to boot, reboot, and poweroff system
+install -v -m755 s6/base/bin/* /sbin/
 
 # Copy scripts to bring NIC's up and down
 install -v -m755 if* /sbin/
@@ -89,17 +96,13 @@ mkinitramfs $(uname -r)
 Directories in s6:
   * base - Base directory for s6-linux-init
   * base/run-image - Directory copied to /run at beginning of boot
-  * base/scripts - Scripts to shutdown and start system via s6-linux-init
   * base/env - Enviromental varibles to set at boot
   * db - Compiled databases for boot
   * db/current - Compiled database to use for boot
-  * skel - Default startup/shutdown scripts
-  * sv - Source definitions for databases and services
-  * scripts - Small scripts used by services compiled from sv
+  * dbsrc - Source definitions for databases and services
   * doc/mock-boot-tree - Use command tree to see how the layout of sv
 
 ## Scripts:
-  * rc.local - Additional shell commands to execute on bootup
   * s6.conf - Global configuration of s6-rc services
 
 ## mkinitrd:
@@ -154,14 +157,10 @@ ls /run/service/*
 
 ```
 
-## Changelog since 4.x.x
+## Changelog since 5.x.x
 
 <ul>
-<li>Updated service format: Bundles now use contents.d & dependencies.d directories instead of contents & dependencies files</li>
-<li>Improved service dependacies: Previous format had issues some services starting before required service(s) executed</li>
-<li>/tmp directory now cleaned during boot and during shutdown </li>
-<li>System clock now set from hardware clock </li>
-<li>Most commands in service scripts use commands from s6-linux-utils or s6-portable-utils </li>
-<li>Cleaned up boot messages that are logged in /run/uncaught-logs/current </li>
-
+<li>Renamed /etc/s6/sv to dbsrc </li>
+<li>Converted boot scripts from execline to sh </li>
+<li>Added safemode bundle for troubleshooting </li>
 </ul>
