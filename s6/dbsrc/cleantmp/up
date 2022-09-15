@@ -1,4 +1,0 @@
-#! /bin/sh
-
-s6-echo "[ ReadWrite Mode ] 0/6 : Cleaning /tmp" >> /run/bootserv.log
-cd /tmp && find . -xdev -mindepth 1 ! -name lost+found -delete

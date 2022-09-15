@@ -1,3 +1,0 @@
-#!/bin/sh
-s6-echo "[ ReadWrite Mode ] 1/6 : Remounting root filesystem as rw"  >> /run/bootserv.log
-s6-mount -o remount,rw / / 

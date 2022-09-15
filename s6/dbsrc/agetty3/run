@@ -1,3 +1,6 @@
-#! /bin/sh
-s6-echo "[    Services    ]     : Enabling tty3" >> /run/bootserv.log 
-exec /sbin/agetty -L -8 tty3 115200
+#!/bin/execlineb -P
+
+# check if /run/enabled-ttys/tty3 exists
+foreground { if { s6-test -f /run/enabled-ttys/tty3 }
+             exec /sbin/agetty -L -8 tty3 115200
+}

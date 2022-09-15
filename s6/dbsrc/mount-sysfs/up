@@ -1,3 +1,0 @@
-#!/bin/sh
-s6-echo "[   Virtual-FS   ] 2/6 : Mounting /sys"  >> /run/bootserv.log
-mountpoint -q /sys || s6-mount -t sysfs -o nosuid,noexec,nodev sys /sys

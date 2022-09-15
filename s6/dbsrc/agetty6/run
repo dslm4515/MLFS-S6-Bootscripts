@@ -1,3 +1,0 @@
-#! /bin/sh
-s6-echo "[    Services    ]     : Enabling tty6" >> /run/bootserv.log 
-exec /sbin/agetty -L -8 tty6 115200

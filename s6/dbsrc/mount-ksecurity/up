@@ -1,9 +1,0 @@
-#!/bin/sh
-
-s6-echo "[   Virtual-FS   ] 5/6 : Mounting securityfs" >> /run/bootserv.log 
-
-if [ -d "/sys/kernel" ]
-then
- mountpoint -q /sys/kernel/security || mount -n -t securityfs securityfs /sys/kernel/security
-fi
-

@@ -1,4 +1,0 @@
-#!/bin/sh
-s6-echo "|--((( S6+S6-rc Bootscripts v 5.0.0 )))---| "  >> /run/bootserv.log 
-s6-echo "[   Virtual-FS   ] 1/6 : Mounting /proc"  >> /run/bootserv.log 
-mountpoint -q /proc  || s6-mount -t proc -o nosuid,noexec,nodev proc /proc

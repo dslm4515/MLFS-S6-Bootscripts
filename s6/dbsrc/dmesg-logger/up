@@ -1,0 +1,2 @@
+#!/bin/execlineb -P
+pipeline { dmesg } s6-setuidgid s6log exec -c s6-log -b -- n3 s2000000 T /var/log/dmesg

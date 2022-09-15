@@ -1,3 +1,0 @@
-#!/bin/sh
-s6-echo "[ ReadWrite Mode ] 5/6 : Cleaning tempfiles" >> /run/bootserv.log
-tmpfiles --exclude-prefix=/dev --create --remove --boot

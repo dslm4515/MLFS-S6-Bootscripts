@@ -1,3 +1,0 @@
-#!/bin/execlineb -P
-if { s6-echo "[     Shutdown   ]     : Cleaning /tmp" }
-/bin/sh -c "/etc/s6/scripts/clean_tmp.sh"
