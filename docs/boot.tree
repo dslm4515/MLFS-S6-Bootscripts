@@ -1,0 +1,50 @@
+Boot Database (dbsrc)
+├── default
+│   ├── vkfs
+│   │   ├── vkfs-procfs
+│   │   ├── vkfs-sysfs
+│   │   ├── vkfs-devfs
+│   │   │   ├── devfs-pts
+│   │   │   └── devfs-shm
+│   │   ├── vkfs-efivars
+│   │   └── vkfs-ksecurity
+│   ├── machine
+│   │   ├── romode
+│   │   │   ├── ro-udev
+│   │   │   │   ├── udev-adm
+│   │   │   │   └── udev-d
+│   │   │   ├── ro-cgroups
+│   │   │   ├── ro-checkfs
+│   │   │   ├── ro-console
+│   │   │   ├── ro-hostname
+│   │   │   ├── ro-hwclock
+│   │   │   ├── ro-ksnodes
+│   │   │   ├── ro-modules
+│   │   │   ├── ro-swap
+│   │   │   ├── ro-sysctl
+│   │   │   └── ro-zram
+│   │   └── rwmode
+│   │       ├── rw-root
+│   │       ├── rw-cleantmp
+│   │       ├── rw-dmesg
+│   │       │   ├── dmesg-logger
+│   │       │   └── dmesg-notice
+│   │       ├── rw-net-lo
+│   │       ├── rw-random-seed
+│   │       └── rw-end
+│   └── services
+│       └── getty
+│           ├── agetty2
+│           ├── agetty3
+│           ├── agetty4
+│           ├── agetty5
+│           └── agetty6
+└── safemode
+    ├── sm-vkfs
+    ├── sm-udev
+    │   ├── sm-udevadm
+    │   └── sm-udevd
+    ├── sm-checkfs
+    ├── sm-console
+    ├── sm-hwclock
+    └── sm-remount

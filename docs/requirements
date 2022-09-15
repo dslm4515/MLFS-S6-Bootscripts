@@ -1,19 +1,19 @@
 ## Reguired file paths:
 
-/sbin/init ...................... required by kernel, executes s6-linux-init with arguments
-/usr/bin/sysusers ............... if esysusers is installed
-/usr/bin/module-load ............ Load kernel modules at boot
-/etc/vconsole.conf .............. Set key map and console font
-/sbin/mkinitramfs ............... create initramfs.img
-/sbin/ifup ...................... Brings up network interfaces
-/sbin/ifdown .................... Brings down network interfaces
-/usr/share/mkinitramfs/init.in .. config for mkinitramfs
-/bin/tmpfiles ................... for creating tempdirs
-/etc/s6/scripts/clean_tmp.sh .... Required by cleantmp service                                                                                        
-/etc/s6/scripts/mount-cgroups ... Required by the cgroups service                                                                                     
-/etc/s6/scripts/console_set.sh .. Required by the console service   
+/sbin/init ............................ Required by kernel, executes s6-linux-init with arguments
+/sbin/init-safemode.................... Optional. Used by kernel to execute s6-linux-init to boot system into 'safemode'
+/etc/s6/s6.conf ....................... Configuration for the boot scripts
+/etc/s6/zram.conf ..................... Configuration for a zRAM device
+/etc/s6/dash-scripts/common_funcs.sh .. Common script fuctions for boot scripts written in sh
+/sbin/mkinitramfs ..................... Creates initramfs.img
+/sbin/ifup ............................ Brings up network interfaces
+/sbin/ifdown .......................... Brings down network interfaces
+/usr/share/mkinitramfs/init.in ........ config for mkinitramfs
 
 ## Required directories:
 
-/etc/sysconfig/ifconfig.* ....... To setup network interfaces during boot
-/lib/services ................... Helper scripts for ifup/ifdown
+/etc/s6/db ............................ Compiled databases for booting
+/etc/s6/dash-scripts .................. Required scripts used by the compiled databases in /etc/s6/db
+/var/log/dmesg ........................ Owned by s6log user. Stores logged boots by dmesg
+/etc/sysconfig/ifconfig.* ............. To setup network interfaces during boot
+/lib/services ......................... Helper scripts for ifup/ifdown
