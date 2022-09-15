@@ -33,12 +33,13 @@ Boot Database (dbsrc)
 │   │       ├── rw-random-seed
 │   │       └── rw-end
 │   └── services
-│       └── getty
-│           ├── agetty2
-│           ├── agetty3
-│           ├── agetty4
-│           ├── agetty5
-│           └── agetty6
+│       ├── getty
+│       │   ├── agetty2
+│       │   ├── agetty3
+│       │   ├── agetty4
+│       │   ├── agetty5
+│       │   └── agetty6
+│       └── netif
 └── safemode
     ├── sm-vkfs
     ├── sm-udev

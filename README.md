@@ -23,8 +23,7 @@ The following can be found at Skarnet (https://skarnet.org/).
 
   * Parallel boot - Boot scripts are executed in parallel with a dependacy hierarchy.
 
-  * Safe Mode - System can now be booted with minimal scripts for troubleshooting. To use, set the kernel parameter `init=/sbin/init` to `init=/sbin/in
-it-safemode`
+  * Safe Mode - System can now be booted with minimal scripts for troubleshooting. To use, set the kernel parameter `init=/sbin/init` to `init=/sbin/init-safemode`
 
   * zRAM Support  - If kernel supports zRAM, a single zRAM device can be initialized at boot.
 
@@ -41,10 +40,7 @@ s6-rc-compile /etc/s6/db/basic /etc/s6/dbsrc
 ln -sv /etc/s6/db/basic /etc/s6/db/current
 
 # Make sure the skeleton scripts are adjusted to boot s6 & s6-rc... or copy over with these:
-```
 cp -v rc.init rc.shutdown runlevel /etc/s6-linux-init/skel/
-
-```
 
 # Re-initialize s6 init base (with utmps installed)
 rm -rf /etc/s6/base
@@ -65,7 +61,7 @@ ln -sv /etc/s6/base/bin/reboot     /usr/sbin/
 ln -sv /etc/s6/base/bin/shutdown   /usr/sbin/
 cp -v  /etc/s6/base/bin/init       /usr/sbin/
 
-# Create the 'safemode' init script:
+# Create the safemode init script:
 cp -v  /etc/s6/base/bin/init       /usr/sbin/init-safemode
 sed -i 's/default/safemode/g'      /usr/sbin/init-safemode 
 
