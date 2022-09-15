@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+### Things to do before hardware halt/reboot/poweroff.
+### Ideally, it should be a single call to the service manager,
+### telling it to bring all the services down.
+
+### If your s6-linux-init-maker invocation was made with the -1
+### option, messages from rc.shutdown will appear on /dev/console
+### as well as be logged by the catch-all logger.
+### If your s6-linux-init-maker invocation did NOT include the -1
+### option, messages from rc.shutdown will only be logged by the
+### catch-all logger and will NOT appear on /dev/console. In order
+### to print them to /dev/console instead, you may want to
+### uncomment the following line:
+exec >/dev/console 2>&1
+
+### Services are managed by s6-rc:
+### "-v0" -- silence all warnings
+### "-v1" -- warnings & errors will be printed to stderr
+### "-v2" -- write info messages whenever s6-rc performs a transition
+### "-v3" -- 3 3+, debug info
+
+exec s6-rc -v1 -bDa change

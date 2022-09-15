@@ -1,0 +1,19 @@
+### 1. Early preparation
+### This is done only once at boot time.
+### Ideally, this phase should just initialize the service manager.
+
+### Services are managed by s6-rc:
+
+s6-rc-init -c /etc/s6/db/current /run/service
+
+### 2. Starting the wanted set of services
+### This is also called every time you change runlevels with telinit.
+### (edit the location to suit your installation)
+### By default, $rl is the string "default", unless you changed it
+### via the -D option to s6-linux-init-maker.
+### Numeric arguments from 1 to 5 on the kernel command line will
+### override the default.
+
+exec /etc/s6/base/scripts/runlevel "$rl"
+
+
