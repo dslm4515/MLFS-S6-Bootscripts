@@ -5,7 +5,7 @@ This is based on the works of Artix Linux (http://www.artixlinux.org/), Skarnet 
 
 The aim of this project is to create the scripts and files to boot a MLFS/LFS system with S6 and S6-rc. This will replace the LFS bootscripts that LFS uses (to boot a LFS system with SysVinit).
 
-The bootscripts were written from excline to sh, to be executed by dash.
+The bootscripts were rewritten from excline to sh, to be executed by dash.
 
 ## Requirements
 
@@ -19,18 +19,32 @@ The following can be found at Skarnet (https://skarnet.org/).
   * s6-linux-init (1.x.x.x)
   * utmps (optional for musl, not needed for Glibc).
 
+## Features
+
+  * Parallel boot - Boot scripts are executed in parallel with a dependacy hierarchy.
+
+  * Safe Mode - System can now be booted with minimal scripts for troubleshooting. To use, set the kernel parameter `init=/sbin/init` to `init=/sbin/in
+it-safemode`
+
+  * zRAM Support  - If kernel supports zRAM, a single zRAM device can be initialized at boot.
+
+
 ## Directions
 
 Copy boot directories and scripts. Do not just copy entire git directory, as it will copy unneeded dot files:
 ```
 # Enter chroot for target system first, otherwise adjust paths accordingly
 cp -ar s6 /etc/
-cp -av vconsole.conf /etc/
-install -v -m755 tmpfiles /bin/
 
 # Compile a basic database for boot
 s6-rc-compile /etc/s6/db/basic /etc/s6/dbsrc 
 ln -sv /etc/s6/db/basic /etc/s6/db/current
+
+# Make sure the skeleton scripts are adjusted to boot s6 & s6-rc... or copy over with these:
+```
+cp -v rc.init rc.shutdown runlevel /etc/s6-linux-init/skel/
+
+```
 
 # Re-initialize s6 init base (with utmps installed)
 rm -rf /etc/s6/base
@@ -44,9 +58,18 @@ s6-linux-init-maker -1 -f /etc/s6-linux-init/skel -p "/bin:/sbin:/usr/bin:/usr/s
                     -D default -G "/sbin/agetty -L -8 tty1 115200" \
                     -c /etc/s6/base -t 2 -L -u root  /etc/s6/base
 
-# Copy necessary scripts to boot, reboot, and poweroff system
-install -v -m755 s6/base/bin/* /sbin/
+# Copy or link necessary scripts to boot, reboot, and poweroff system
+ln -sv /etc/s6/base/bin/halt       /usr/sbin/
+ln -sv /etc/s6/base/bin/poweroff   /usr/sbin/
+ln -sv /etc/s6/base/bin/reboot     /usr/sbin/
+ln -sv /etc/s6/base/bin/shutdown   /usr/sbin/
+cp -v  /etc/s6/base/bin/init       /usr/sbin/
 
+# Create the 'safemode' init script:
+cp -v  /etc/s6/base/bin/init       /usr/sbin/init-safemode
+sed -i 's/default/safemode/g'      /usr/sbin/init-safemode 
+
+# If not using NetworkManager:
 # Copy scripts to bring NIC's up and down
 install -v -m755 if* /sbin/
 mkdir -pv /lib/services
@@ -100,10 +123,12 @@ Directories in s6:
   * db - Compiled databases for boot
   * db/current - Compiled database to use for boot
   * dbsrc - Source definitions for databases and services
+  * dash-scripts - Boot scripts used in the compiled databases
   * doc/mock-boot-tree - Use command tree to see how the layout of sv
 
-## Scripts:
+## Boot Configuration:
   * s6.conf - Global configuration of s6-rc services
+  * zram.conf - Configuration for setting up a zram device
 
 ## mkinitrd:
   * mkinitramfs - Script to make a basic initramfs
@@ -127,17 +152,17 @@ Examples are in net-configs
 
 ## Usage
 
-To disable/enable services, modify the contents of `/etc/s6/sv/services/contents.d`. Then compile a new database to use for the next boot.
+To disable/enable services, modify the contents of `/etc/s6/dbsrc/services/contents.d`. Then compile a new database to use for the next boot.
 
 For example, to enable dbus service:
 ```
-# Install dbus service scripts (dbus-srv, dbus-log) to /etc/s6/sv/
+# Install dbus service scripts (dbus-srv, dbus-log) to /etc/s6/dbsrc/
 
 # Add dbus script to list of services to start at boot:
-touch /etc/s6/sv/services/contents.d/dbus-srv
+touch /etc/s6/dbsrc/services/contents.d/dbus-srv
 
 # Compile a new database for boot
-s6-rc-compile /etc/s6/db/${new_db} /etc/s6/sv
+s6-rc-compile /etc/s6/db/${new_db} /etc/s6/dbsrc
 
 # Link new database to boot
 mv -v /etc/s6/db/current /etc/s6/db/previous
@@ -160,7 +185,10 @@ ls /run/service/*
 ## Changelog since 5.x.x
 
 <ul>
-<li>Renamed /etc/s6/sv to dbsrc </li>
-<li>Converted boot scripts from execline to sh </li>
-<li>Added safemode bundle for troubleshooting </li>
+<li>Redesigned boot database</li>
+<li>Updated instructions to check s6-linux-init skeleton scripts</li>
+<li>Added zRAM support</li>
+<li>Renamed /etc/s6/sv to dbsrc</li>
+<li>Converted oneshot boot scripts from execline to sh. Longrun scripts still need to be in execline</li>
+<li>Added safemode bundle for troubleshooting</li>
 </ul>
