@@ -3,10 +3,9 @@
 . /etc/s6/dash-scripts/common_funcs.sh
 
 # Check for ifconfig.$ifname files in /etc/sysconfig
+ls /etc/sysconfig/* 2>/dev/null | grep ifconfig 1>/dev/null; netconfigs=$?
 
-netconfigs(`find /etc/sysconfig/ -maxdepth 1 -name "ifconfig.*"`)
-
-if [ ${netconfigs[@]} -gt 1 ]; then
+if [ $netconfigs -eq 0 ]; then
 	# Bring up/down those NIC's
 	if [ "$1" = "up" ]; then
 		# Bring up the NIC's
