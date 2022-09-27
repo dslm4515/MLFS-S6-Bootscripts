@@ -1,1 +1,1 @@
-/bin/sh -c "/etc/s6/dash-scripts/rw-dmesg.sh"
+/bin/sh -c "/etc/s6/dash-scripts/rw-net-lo.sh"
