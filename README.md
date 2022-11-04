@@ -5,7 +5,7 @@ This is based on the works of Artix Linux (http://www.artixlinux.org/), Skarnet 
 
 The aim of this project is to create the scripts and files to boot a MLFS/LFS system with S6 and S6-rc. This will replace the LFS bootscripts that LFS uses (to boot a LFS system with SysVinit).
 
-The bootscripts were rewritten from excline to sh, to be executed by dash.
+Most of the bootscripts (oneshot) were rewritten from excline to sh, to be executed by dash. Long running scripts (longrun) are required to be written in execline for S6-rc.
 
 ## Requirements
 
