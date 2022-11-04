@@ -6,9 +6,9 @@ msg "Setting hostname... \n"
 
 if [ -f /etc/hostname ]
 then
-	HOSTNAME=$(cat /etc/hostname)
+	hostname $(cat /etc/hostname)
 else
-	HOSTNAME=$(cat /proc/sys/kernel/hostname)
+	hostname $(cat /proc/sys/kernel/hostname)
 fi
 
 dbg "hostname set to $HOSTNAME \n"
