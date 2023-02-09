@@ -10,14 +10,24 @@ Most of the bootscripts (oneshot) were rewritten from excline to sh, to be execu
 ## Requirements
 
 The following can be found at Skarnet (https://skarnet.org/).
-  * skalibs 2.11.1.x (required by execline)
+  * skalibs 2.11.2.x (required by execline)
   * execline 2.8.2.x (required by s6-rc)
-  * s6 2.1.0.x (required by s6-rc)
+  * s6 2.11.0.x (required by s6-rc)
   * s6-linux-utils
   * s6-portable-utils (statically built)
   * s6-rc 0.5.3.x (New service format)
-  * s6-linux-init (1.x.x.x)
+  * s6-linux-init (1.0.7.x)
   * utmps (optional for musl, not needed for Glibc).
+
+WARNING: Bootscripts are not compatible with the latest s6* versions. These bootscripts have been tested to work against:
+  * skalibs 2.11.2.0
+  * utmps 0.1.1.0
+  * execline 2.8.2.0
+  * s6 2.11.0.1
+  * s6-rc 0.5.3.0
+  * s6-linux-init 1.0.7.0
+  * s6-linux-utils 2.5.1.7
+  * s6-portable-utils 2.2.3.4
 
 ## Features
 
