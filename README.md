@@ -10,24 +10,25 @@ Most of the bootscripts (oneshot) were rewritten from excline to sh, to be execu
 ## Requirements
 
 The following can be found at Skarnet (https://skarnet.org/).
-  * skalibs 2.11.2.x (required by execline)
-  * execline 2.8.2.x (required by s6-rc)
-  * s6 2.11.0.x (required by s6-rc)
+  * skalibs 2.13.x.x (required by execline)
+  * execline 2.9.x.x (required by s6-rc)
+  * s6 2.11.3.x (required by s6-rc)
   * s6-linux-utils
-  * s6-portable-utils (statically built)
+  * s6-portable-utils 2.3.x.x (statically built)
   * s6-rc 0.5.3.x (New service format)
-  * s6-linux-init (1.0.7.x)
+  * s6-linux-init (1.1.x.x)
   * utmps (optional for musl, not needed for Glibc).
 
-WARNING: Bootscripts are not compatible with the latest s6* versions. These bootscripts have been tested to work against:
-  * skalibs 2.11.2.0
-  * utmps 0.1.1.0
-  * execline 2.8.2.0
-  * s6 2.11.0.1
-  * s6-rc 0.5.3.0
-  * s6-linux-init 1.0.7.0
-  * s6-linux-utils 2.5.1.7
-  * s6-portable-utils 2.2.3.4
+WARNING: Bootscripts may not compatible with the latest s6 software versions. 
+These bootscripts have been tested to work against:
+  * skalibs 2.13.1.1
+  * utmps 0.1.2.1
+  * execline 2.9.3.0
+  * s6 2.11.3.2
+  * s6-rc 0.5.4.1
+  * s6-linux-init 1.1.1.1
+  * s6-linux-utils 2.6.1.2
+  * s6-portable-utils 2.3.0.2
 
 ## Features
 
@@ -56,13 +57,13 @@ cp -v rc.init rc.shutdown runlevel /etc/s6-linux-init/skel/
 rm -rf /etc/s6/base
 s6-linux-init-maker -1 -f /etc/s6-linux-init/skel -p "/bin:/sbin:/usr/bin:/usr/sbin"    \
                     -D default -G "/sbin/agetty -L -8 tty1 115200" \
-                    -c /etc/s6/base -t 2 -L -u root -U utmp /etc/s6/base
+                    -c /etc/s6/base -t 2 -L -u s6log /etc/s6/base
 
 # Re-initialize s6 init base (without utmps installed)
 rm -rf /etc/s6/base
 s6-linux-init-maker -1 -f /etc/s6-linux-init/skel -p "/bin:/sbin:/usr/bin:/usr/sbin"    \
                     -D default -G "/sbin/agetty -L -8 tty1 115200" \
-                    -c /etc/s6/base -t 2 -L -u root  /etc/s6/base
+                    -c /etc/s6/base -t 2 -L -u s6-log  /etc/s6/base
 
 # Copy or link necessary scripts to boot, reboot, and poweroff system
 ln -sv /etc/s6/base/bin/halt       /usr/sbin/
@@ -102,10 +103,10 @@ useradd -c "utmps user" -d /run/utmps \
 
 Make sure the directory for wtmp is owned by utmp user:
 ```
-mkdir -pv /var/log/utmps
-mv -v /var/log/wtmp /var/log/utmps/
-chown -vR utmp:utmp /var/log/utmps
-ln -sv utmps/wtmp /var/log/wtmp
+mkdir -pv /run/utmps
+chown -v utmp:utmp /run/utmps
+mv -v /var/log/wtmp /run/utmps/
+ln -sv /run/utmps /var/log/utmps
 ```
 
 Bootscripts no longer require system boot with a initramfs image. But kernel parameters should boot with root filesystem as read-only for checking root filesystem at boot (i.e. linux root=/dev/sda2 ro) You may use scripts from BLFS or Musl-LFS to build one. Script requires cpio installed.
