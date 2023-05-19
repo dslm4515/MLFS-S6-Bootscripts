@@ -1,6 +1,6 @@
 #!/bin/execlineb -P
 
 # check if /run/enabled-ttys/tty3 exists
-foreground { if { s6-test -f /run/enabled-ttys/tty3 }
+foreground { if { eltest -f /run/enabled-ttys/tty3 }
              exec /sbin/agetty -L -8 tty3 115200
 }
