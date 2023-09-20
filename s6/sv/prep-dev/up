@@ -1,5 +1,5 @@
 #!/bin/execlineb -P
-if { s6-echo "[   Virtual-FS   ] 0/6 : Creating mount points" }
+if { s6-echo "Creating mount points..." }
 foreground { 
   if -n { s6-test -d /dev/shm }
   s6-mkdir /dev/shm

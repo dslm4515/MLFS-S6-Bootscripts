@@ -36,7 +36,7 @@ up()
 RELEASE="7.2"
 
 USAGE="Usage: $0 [ -hV ] [--help] [--version] interface"
-VERSTR="LFS ifup, version ${RELEASE}"
+VERSTR="ifup, version ${RELEASE}"
 
 while [ $# -gt 0 ]; do
    case "$1" in

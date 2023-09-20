@@ -1,5 +1,5 @@
 #!/bin/execlineb -P
-if { s6-echo "[ Read-Only Mode ] 1/9 : Mounting cgroups" }
+if { s6-echo "Mounting cgroups..." }
 envfile /etc/s6/s6.conf
 importas -iu CGROUP_MODE CGROUP_MODE
 importas -iu CGROUP_CONTROLLERS CGROUP_CONTROLLERS

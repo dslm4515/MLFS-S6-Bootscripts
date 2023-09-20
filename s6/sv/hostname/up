@@ -1,5 +1,5 @@
 #!/bin/execlineb -P
-if { s6-echo "[ Read-Only Mode ] 3/9 : Setting hostname" }
+if { s6-echo "Setting hostname..." }
 if -t { s6-test -s /etc/hostname } backtick -n HOSTNAME { head -1 /etc/hostname }
 importas -iu HOSTNAME HOSTNAME
 if -t { s6-test -n $HOSTNAME } redirfd -w 1 /proc/sys/kernel/hostname echo $HOSTNAME

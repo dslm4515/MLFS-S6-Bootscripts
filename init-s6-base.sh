@@ -1,6 +1,6 @@
 #! /bin/bash
 
-echo "Re-initializing init base..."
+echo "Reinitializing init base..."
 rm -rf /etc/s6/base &&
 s6-linux-init-maker -1 -f /etc/s6/skel -p "/bin:/sbin:/usr/bin"    \
 	            -D default -G "/sbin/agetty -L -8 tty1 115200" \

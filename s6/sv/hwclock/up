@@ -1,5 +1,5 @@
 #!/bin/execlineb -P
-if { s6-echo "[ Read-Only Mode ] 4/9 : Setting system clock from rtc0" }
+if { s6-echo "Setting system clock from rtc0..." }
 envfile /etc/s6/s6.conf
 importas -iu HARDWARECLOCK HARDWARECLOCK
 foreground { if { s6-test $HARDWARECLOCK = UTC } hwclock --systz --utc --noadjfile }

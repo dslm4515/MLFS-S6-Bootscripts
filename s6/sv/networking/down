@@ -1,8 +1,8 @@
 #!/bin/execlineb -P
 fdmove -c 2 1
-if { s6-echo -- [     Shutdown   ]     : Shutting down WiFi & Ethernet... }
+if { s6-echo -- "Stopping networking interfaces..." }
 export IN_BOOT 1
-foreground { echo "[     Shutdown   ]    : Stopping networking interfaces..." }
+foreground { echo "Stopping networking interfaces..." }
 elglob -0 FILES /etc/sysconfig/ifconfig.*
 forx INTERFACE { ${FILES} }
  importas -u INTERFACE INTERFACE

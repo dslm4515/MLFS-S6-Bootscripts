@@ -1,4 +1,3 @@
 #!/bin/execlineb -P
-if { s6-echo "|--((( S6+S6-rc Bootscripts v 5.0.0 )))---| " }
-if { s6-echo "[   Virtual-FS   ] 1/6 : Mounting /proc" }
+if { s6-echo "Mounting /proc..." }
 s6-mount -t proc -o nosuid,noexec,nodev proc /proc

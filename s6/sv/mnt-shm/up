@@ -1,5 +1,5 @@
 #!/bin/execlineb -P
-if { s6-echo "[   Virtual-FS   ] 4/6 : Mounting /dev/shm" }
+if { s6-echo "Mounting /dev/shm..." }
 foreground {
   if -n { mountpoint -q /dev/shm }
   s6-mount -t tmpfs -o mode=1777,nosuid,nodev shm /dev/shm

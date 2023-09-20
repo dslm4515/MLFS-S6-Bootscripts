@@ -1,5 +1,5 @@
 #!/bin/execlineb -P
-if { s6-echo "[   Virtual-FS   ] 5/6 : Mounting securityfs" }
+if { s6-echo "Mounting securityfs..." }
 foreground {
    if { test -d /sys/kernel }
         if -n { mountpoint -q /sys/kernel/security }

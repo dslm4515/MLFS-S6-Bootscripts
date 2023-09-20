@@ -1,5 +1,5 @@
 #!/bin/execlineb -P
-if { s6-echo "[   Virtual-FS   ] 6/6 : Mounting EFI-vars-fs" }
+if { s6-echo "Mounting efivars..." }
 foreground {
    if { test -d /sys/firmware/efi }
        if -n { mountpoint -q /sys/firmware/efi/efivars }

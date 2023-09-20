@@ -1,5 +1,5 @@
 #!/bin/execlineb -P
-if { s6-echo "[   Virtual-FS   ] 3/6 : Mounting /dev/pts" }
+if { s6-echo "Mounting /dev/pts..." }
 foreground { 
   if -n { mountpoint -q /dev/pts }
   s6-mount -t devpts -o mode=0620,gid=5,nosuid,noexec devpts /dev/pts

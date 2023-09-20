@@ -1,3 +1,3 @@
 #!/bin/execlineb -P
-if { s6-echo "[ Read-Only Mode ] 2/9 : Setting up console" }
+if { s6-echo "Setting up the console..." }
 sh -c "/etc/s6/scripts/console_set.sh"

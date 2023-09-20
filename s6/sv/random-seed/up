@@ -1,5 +1,5 @@
 #!/bin/execlineb -P
-if { s6-echo "[ ReadWrite Mode ] 4/6 : Restoring random seed" }
+if { s6-echo "Restoring random seed..." }
 #foreground { umask 077; cp /var/lib/random-seed /dev/urandom }
 foreground { cp /var/lib/random-seed /dev/urandom } 
 backtick -n bytes { cat /proc/sys/kernel/random/poolsize }
