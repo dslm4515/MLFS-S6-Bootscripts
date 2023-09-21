@@ -10,7 +10,7 @@ The aim of this project is to create the scripts and files to boot a MLFS/LFS sy
 The following can be found at Skarnet (https://skarnet.org/).
   * skalibs 2.11.1.x (required by execline)
   * execline 2.8.2.x (required by s6-rc)
-  * s6 2.1.0.x (required by s6-rc)
+  * s6 2.11.0.x (required by s6-rc)
   * s6-linux-utils
   * s6-portable-utils (statically built)
   * s6-rc 0.5.3.x (New service format)
