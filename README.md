@@ -86,7 +86,7 @@ install -v -m755 net-services/* /lib/services/
 For logging services, create the log user as root:
 ```
 groupadd -g 983 s6log &&
-useradd -c "S6-Log User" -d / \
+useradd -c "S6-Log User" -M \
         -u 983 -g s6log -s /usr/bin/false s6log
 ```
 Make sure the directory for dmesg logging is owned by the log user
