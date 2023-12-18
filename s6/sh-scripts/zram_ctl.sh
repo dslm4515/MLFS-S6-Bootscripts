@@ -5,7 +5,7 @@
 # USAGE: zram_ctl start | stop
 #
 
-. /etc/s6/dash-scripts/common_funcs.sh 
+. /etc/s6/sh-scripts/common_funcs.sh 
 . /etc/s6/zram.conf
 
 if [ "$1" = "start" ]; then

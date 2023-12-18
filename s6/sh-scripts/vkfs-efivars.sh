@@ -1,6 +1,6 @@
 #! /bin/sh
 
-. /etc/s6/dash-scripts/common_funcs.sh 
+. /etc/s6/sh-scripts/common_funcs.sh 
 
 # Check if booting in UEFI or non-UEFI mode
 if [ -d /sys/firmware/efi ]

@@ -1,6 +1,6 @@
 #! /bin/sh
 
-. /etc/s6/dash-scripts/common_funcs.sh
+. /etc/s6/sh-scripts/common_funcs.sh
 . /etc/s6/s6.conf
 
 case $1 in

@@ -1,9 +1,9 @@
 #! /bin/sh
 
-. /etc/s6/dash-scripts/common_funcs.sh 
+. /etc/s6/sh-scripts/common_funcs.sh 
 
 msg "Booting with S6+S6rc ... \n"
-dbg "using dash scripts \n"
+dbg "using sh scripts \n"
 
 msg "Checking for /proc mount point: \n"
 

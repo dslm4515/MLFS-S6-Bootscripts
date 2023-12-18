@@ -1,6 +1,6 @@
 #! /bin/sh
 
-. /etc/s6/dash-scripts/common_funcs.sh
+. /etc/s6/sh-scripts/common_funcs.sh
 
 # Check for ifconfig.$ifname files in /etc/sysconfig
 ls /etc/sysconfig/* 2>/dev/null | grep ifconfig 1>/dev/null; netconfigs=$?

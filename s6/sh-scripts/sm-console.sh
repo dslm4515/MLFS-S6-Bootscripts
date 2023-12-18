@@ -1,6 +1,6 @@
 #! /bin/sh
 
-. /etc/s6/dash-scripts/common_funcs.sh
+. /etc/s6/sh-scripts/common_funcs.sh
 
 msg "Setting up ttys 1 & 2 to unicode mode...\n"
 unicode_start < /dev/tty1 || emergency_shell
