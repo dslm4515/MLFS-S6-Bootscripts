@@ -4,7 +4,7 @@
 /sbin/init-safemode.................... Optional. Used by kernel to execute s6-linux-init to boot system into 'safemode'
 /etc/s6/s6.conf ....................... Configuration for the boot scripts
 /etc/s6/zram.conf ..................... Configuration for a zRAM device
-/etc/s6/dash-scripts/common_funcs.sh .. Common script fuctions for boot scripts written in sh
+/etc/s6/sh-scripts/common_funcs.sh .... Common script fuctions for boot scripts written in sh
 /sbin/mkinitramfs ..................... Creates initramfs.img
 /sbin/ifup ............................ Brings up network interfaces
 /sbin/ifdown .......................... Brings down network interfaces
@@ -13,7 +13,7 @@
 ## Required directories:
 
 /etc/s6/db ............................ Compiled databases for booting
-/etc/s6/dash-scripts .................. Required scripts used by the compiled databases in /etc/s6/db
+/etc/s6/sh-scripts .................... Required scripts used by the compiled databases in /etc/s6/db
 /var/log/dmesg ........................ Owned by s6log user. Stores logged boots by dmesg
 /etc/sysconfig/ifconfig.* ............. To setup network interfaces during boot
 /lib/services ......................... Helper scripts for ifup/ifdown
