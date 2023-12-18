@@ -1,28 +1,44 @@
-|--((( S6+S6-rc Bootscripts v 5.0.0 )))---| 
-[   Virtual-FS   ] 1/6 : Mounting /proc
-[   Virtual-FS   ] 0/6 : Creating mount points
-[ Read-Only Mode ] 3/9 : Setting hostname
-[   Virtual-FS   ] 2/6 : Mounting /sys
-[   Virtual-FS   ] 5/6 : Mounting securityfs
-[   Virtual-FS   ] 6/6 : Mounting EFI-vars-fs
-[ Read-Only Mode ] 5/9 : Setting up Kernel Static Node(s)
-[   Virtual-FS   ] 3/6 : Mounting /dev/pts
-[   Virtual-FS   ] 4/6 : Mounting /dev/shm
-[ Read-Only Mode ] 8/9 : Intializing udev daemon
-[ Read-Only Mode ] 9/9 : Setting up devices & subsystems
-[ Read-Only Mode ] 1/9 : Mounting cgroups
-[    Services    ]     : Enabling tty3
-[    Services    ]     : Enabling tty2
-[ Read-Only Mode ] 0/9 : Setting kernel parameters
-[ Read-Only Mode ] 7/9 : Turning on any swap/swap-files
-[ Read-Only Mode ] 4/9 : Setting system clock from rtc0
-[ Read-Only Mode ] 6/9 : Loading any kernel modules
-[ Read-Only Mode ] 2/9 : Setting up console
-[ ReadWrite Mode ] 1/6 : Remounting root filesystem as rw
-[ ReadWrite Mode ] 4/6 : Restoring random seed
-[ ReadWrite Mode ] 2/6 : Logging kernel boot
-[ ReadWrite Mode ] 0/6 : Cleaning /tmp
-[ ReadWrite Mode ] 3/6 : Setting up network loopback device
-[ ReadWrite Mode ] 5/6 : Cleaning tempfiles
-[ ReadWrite Mode ] 6/6 : Setting up tmpfiles
-[   Networking   ]     : Bringing up any network interfaces...
+(o) Booting with S6+S6rc ... 
+ |- using sh scripts 
+(o) Checking for /proc mount point: 
+ |- /proc found - OK
+(o) Mounting proc filesystem...
+ |- /proc mounted -  OK
+(o) Mounting devshm...
+WARNING: /dev/shm not found, creating...
+ |- /dev/shm mounted -  OK
+(o) Mounting devpts..
+WARNING: /dev/pts not found, creating...
+ |- /dev/pts mounted - OK
+(o) Checking for /sys mount point:
+ |- /sys found - OK
+(o) Mounting sys filesystem...
+ |- /sys mounted -  OK
+(o) Booting in non-UEFI mode.
+(o) Setting up Kernel Static Node(s)... 
+(o) Setting hostname... 
+ |- hostname set to MLFS
+(o) Started udev. 
+ |- waiting for devices to settle...
+(o) Setting up ttys ...
+ |-  enabling tty6
+ |-  enabling tty5
+ |-  enabling tty4
+ |-  enabling tty3
+(o) Set font & unicode mode for tty6 tty5 tty4 tty3 tty2 tty1 ...
+(o) Mounting cgroups...
+ |- cgroups mode is hybrid.
+(o) Check file systems?
+ |- No check was asked. OK
+(o) Remounting root filesystem as rw -  OK
+(o) Cleaning /tmp ... ok
+(o) Initializing random seed... ok
+(o) Activating swap file/partitions 
+(o) Turning on zRAM. 
+ |- zRAM is 2G with zstd compression. 
+(o) Loading any kernel modules... ok
+(o) Setting system clock from real-time clock
+ |- Using localtime for hardware clock. 
+(o) Logging kernel boot to log.
+(o) Setting up network loopback device... ok
+
