@@ -130,8 +130,8 @@ Directories in s6:
   * db - Compiled databases for boot
   * db/current - Compiled database to use for boot
   * dbsrc - Source definitions for databases and services
-  * dash-scripts - Boot scripts used in the compiled databases
-  * doc/mock-boot-tree - Use command tree to see how the layout of sv
+  * sh-scripts - Boot scripts used in the compiled databases
+  * doc/boot-tree - The layout of dbsrc in tree format
 
 ## Boot Configuration:
   * s6.conf - Global configuration of s6-rc services
@@ -176,7 +176,7 @@ mv -v /etc/s6/db/current /etc/s6/db/previous
 ln -sv /etc/s6/db/${new_db} /etc/s6/db/current
 ```
 
-Services an be enabled or disabled after boot:
+Services can be enabled or disabled after boot:
 ```
 # Enable a service that was not enabled at boot
 sudo s6-rc -u change ${service_name}
@@ -191,7 +191,8 @@ ls /run/service/*
 
 ## Changelog since 5.x.x
 
-<ul>
+<ul
+<li>Renamed dash-scripts to sh-scripts. Fixed references to dash-scripts</li>>
 <li>Redesigned boot database</li>
 <li>Updated instructions to check s6-linux-init skeleton scripts</li>
 <li>Added zRAM support</li>
