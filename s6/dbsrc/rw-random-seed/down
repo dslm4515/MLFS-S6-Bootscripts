@@ -1,1 +1,1 @@
-/bin/sh -c "/etc/s6/dash-scripts/rw-random-seed.sh down"
+/bin/sh -c "/etc/s6/sh-scripts/rw-random-seed.sh down"

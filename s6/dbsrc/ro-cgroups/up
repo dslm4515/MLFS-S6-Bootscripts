@@ -1,2 +1,2 @@
-/bin/sh -c "/etc/s6/dash-scripts/ro-cgroups.sh"
+/bin/sh -c "/etc/s6/sh-scripts/ro-cgroups.sh"
 

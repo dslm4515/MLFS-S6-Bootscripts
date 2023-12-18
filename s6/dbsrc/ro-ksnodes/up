@@ -1,1 +1,1 @@
-/bin/sh -c "/etc/s6/dash-scripts/ro-ksnodes.sh"
+/bin/sh -c "/etc/s6/sh-scripts/ro-ksnodes.sh"
